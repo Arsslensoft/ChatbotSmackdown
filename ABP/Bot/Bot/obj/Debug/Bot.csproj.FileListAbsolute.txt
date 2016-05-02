@@ -1,0 +1,11 @@
+E:\Research\CBSD\ABP\Bot\Bot\bin\Debug\Bot.exe.config
+E:\Research\CBSD\ABP\Bot\Bot\bin\Debug\Bot.exe
+E:\Research\CBSD\ABP\Bot\Bot\bin\Debug\Bot.pdb
+E:\Research\CBSD\ABP\Bot\Bot\obj\Debug\Bot.csprojResolveAssemblyReference.cache
+E:\Research\CBSD\ABP\Bot\Bot\obj\Debug\Bot.exe
+E:\Research\CBSD\ABP\Bot\Bot\obj\Debug\Bot.pdb
+E:\Research\CBSD\ABP\Bot\Bot\bin\Debug\ABPS.dll
+E:\Research\CBSD\ABP\Bot\Bot\bin\Debug\ABPS.pdb
+E:\Research\CBSD\ABP\Release\Bot.exe.config
+E:\Research\CBSD\ABP\Release\Bot.exe
+E:\Research\CBSD\ABP\Release\Bot.pdb

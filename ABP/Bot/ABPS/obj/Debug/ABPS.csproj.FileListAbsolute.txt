@@ -1,0 +1,12 @@
+E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\ABPS.dll
+E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\ABPS.pdb
+E:\Research\CBSD\ABP\Bot\ABPS\obj\Debug\ABPS.dll
+E:\Research\CBSD\ABP\Bot\ABPS\obj\Debug\ABPS.pdb
+E:\Research\CBSD\ABP\Bot\ABPS\obj\Debug\ABPS.csprojResolveAssemblyReference.cache
+E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\Newtonsoft.Json.dll
+E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\Newtonsoft.Json.xml
+E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\ABPS.Data.dll
+E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\EntityFramework.dll
+E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\MySql.Data.dll
+E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\ABPS.Data.pdb
+E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\MySql.Data.pdb

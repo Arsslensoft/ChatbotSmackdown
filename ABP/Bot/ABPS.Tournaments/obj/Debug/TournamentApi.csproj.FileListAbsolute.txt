@@ -1,0 +1,7 @@
+E:\Research\CBSD\ABP\Bot\Test\TOURNAMENT\TournamentApi\bin\Debug\TournamentApi.dll
+E:\Research\CBSD\ABP\Bot\Test\TOURNAMENT\TournamentApi\bin\Debug\TournamentApi.pdb
+E:\Research\CBSD\ABP\Bot\Test\TOURNAMENT\TournamentApi\bin\Debug\TournamentApi.dll.CodeAnalysisLog.xml
+E:\Research\CBSD\ABP\Bot\Test\TOURNAMENT\TournamentApi\bin\Debug\TournamentApi.dll.lastcodeanalysissucceeded
+E:\Research\CBSD\ABP\Bot\Test\TOURNAMENT\TournamentApi\obj\Debug\TournamentApi.csprojResolveAssemblyReference.cache
+E:\Research\CBSD\ABP\Bot\Test\TOURNAMENT\TournamentApi\obj\Debug\TournamentApi.dll
+E:\Research\CBSD\ABP\Bot\Test\TOURNAMENT\TournamentApi\obj\Debug\TournamentApi.pdb
