@@ -10,3 +10,5 @@ E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\EntityFramework.dll
 E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\MySql.Data.dll
 E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\ABPS.Data.pdb
 E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\MySql.Data.pdb
+E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\ABPS.Aiml.dll
+E:\Research\CBSD\ABP\Bot\ABPS\bin\Debug\ABPS.Aiml.pdb

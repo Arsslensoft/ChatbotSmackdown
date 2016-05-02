@@ -55,8 +55,10 @@
     <Compile Include="HttpService.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="PlatformAPI.cs" />
+    <Compile Include="Chatbot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response.cs" />
+    <Compile Include="TournamentManager.cs" />
     <Compile Include="Tournament\EliminationTournament.cs" />
     <Compile Include="Tournament\Helpers\BracketDecider.cs" />
     <Compile Include="Tournament\Helpers\ByeDecider.cs" />
@@ -74,6 +76,10 @@
     <Compile Include="Tournament\Plugins\StandardTournamentsPluginEnumerator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ABPS.Aiml\ABPS.Aiml.csproj">
+      <Project>{505ceb00-53f5-4e67-a758-38ebe5204e4a}</Project>
+      <Name>ABPS.Aiml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ABPS.Data\ABPS.Data.csproj">
       <Project>{7e62f30e-bc53-4598-ba0d-78764ac15755}</Project>
       <Name>ABPS.Data</Name>

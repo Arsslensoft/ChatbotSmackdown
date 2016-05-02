@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{85C44996-6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{FCF10250-C6CF-44CD-9388-3E3687F60C9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABPS.Aiml", "ABPS.Aiml\ABPS.Aiml.csproj", "{505CEB00-53F5-4E67-A758-38EBE5204E4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FCF10250-C6CF-44CD-9388-3E3687F60C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCF10250-C6CF-44CD-9388-3E3687F60C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCF10250-C6CF-44CD-9388-3E3687F60C9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{505CEB00-53F5-4E67-A758-38EBE5204E4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{505CEB00-53F5-4E67-A758-38EBE5204E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{505CEB00-53F5-4E67-A758-38EBE5204E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{505CEB00-53F5-4E67-A758-38EBE5204E4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
