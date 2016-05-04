@@ -1,5 +1,7 @@
+using ABPS.Aiml.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace ABPS.Aiml
@@ -77,15 +79,38 @@ namespace ABPS.Aiml
         /// </summary>
         /// <param name="UserID">The GUID of the user</param>
         /// <param name="bot">the bot the user is connected to</param>
-		public User(string UserID, ABPS.Aiml.Bot bot)
-		{
+		public User(string UserID, ABPS.Aiml.Bot bot, string bot_path )
+        {
+        //    if (UserID.Length > 0)
+        //    {
+        //        this.id = UserID;
+        //        this.bot = bot;
+        //        this.Predicates = new ABPS.Aiml.Utils.SettingsDictionary(this.bot);
+        //        this.bot.DefaultPredicates.Clone(this.Predicates);
+        //        this.Predicates.addSetting("topic", "*");
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("The UserID cannot be empty");
+        //    }
+
             if (UserID.Length > 0)
             {
                 this.id = UserID;
                 this.bot = bot;
-                this.Predicates = new ABPS.Aiml.Utils.SettingsDictionary(this.bot);
-                this.bot.DefaultPredicates.Clone(this.Predicates);
-                this.Predicates.addSetting("topic", "*");
+                this.Predicates = new SettingsDictionary(this.bot);
+
+                if (!File.Exists(bot_path + @"\users\" + UserID + ".xml"))
+                {
+                    this.bot.DefaultPredicates.Clone(this.Predicates);
+                    this.Predicates.addSetting("topic", "*");
+                    this.Predicates.updateSetting("name", UserID);
+                }
+                else
+                {
+                    this.Predicates = new SettingsDictionary(this.bot);
+                    this.Predicates.loadSettings(bot_path + @"\users\" + UserID + ".xml");
+                }
             }
             else
             {

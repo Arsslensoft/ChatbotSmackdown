@@ -17,16 +17,7 @@ namespace ABPS.Data
            this.Games = new List<Game>();
        }
        public int Number { get; set; }
-       public Round(IEnumerable<Game> games)
-        {
-            if (games == null)
-            {
-                throw new ArgumentNullException("games");
-            }
-
-            this.Games = new List<Game>(games);
-        }
-
+     
        [InverseProperty("Round")]
        public virtual List<Game> Games { get; set; }
 

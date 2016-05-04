@@ -25,7 +25,7 @@
 // <author>John Gietzen</author>
 //-----------------------------------------------------------------------
 
-namespace Tournaments
+namespace ABPS.Tournaments
 {
     using System;
 
@@ -37,14 +37,14 @@ namespace Tournaments
         /// <summary>
         /// Holds the team being scored.
         /// </summary>
-        private readonly User team;
+        private readonly TournamentTeam team;
 
         /// <summary>
         /// Initializes a new instance of the TournamentTeamScore class.
         /// </summary>
         /// <param name="team">The team being scored.</param>
         /// <param name="score">The score that the team obtained.</param>
-        public TournamentTeamScore(User team, Score score)
+        public TournamentTeamScore(TournamentTeam team, Score score)
         {
             if (team == null)
             {
@@ -58,7 +58,7 @@ namespace Tournaments
         /// <summary>
         /// Gets the team being scored.
         /// </summary>
-        public User Team
+        public TournamentTeam Team
         {
             get
             {

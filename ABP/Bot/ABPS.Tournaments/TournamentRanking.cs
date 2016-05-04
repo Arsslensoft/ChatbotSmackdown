@@ -25,7 +25,7 @@
 // <author>John Gietzen</author>
 //-----------------------------------------------------------------------
 
-namespace Tournaments
+namespace ABPS.Tournaments
 {
     /// <summary>
     /// Describes the position of a team in a tournament's rankings.
@@ -35,7 +35,7 @@ namespace Tournaments
         /// <summary>
         /// Holds the team being ranked.
         /// </summary>
-        private readonly User team;
+        private readonly TournamentTeam team;
 
         /// <summary>
         /// Holds the rank number of the ranking.
@@ -53,7 +53,7 @@ namespace Tournaments
         /// <param name="team">The team being ranked.</param>
         /// <param name="rank">The actual rank number of the ranking.</param>
         /// <param name="scoreDescription">The score description or justification of the ranking.</param>
-        public TournamentRanking(User team, double rank, string scoreDescription)
+        public TournamentRanking(TournamentTeam team, double rank, string scoreDescription)
         {
             this.team = team;
             this.rank = rank;
@@ -63,7 +63,7 @@ namespace Tournaments
         /// <summary>
         /// Gets the team being ranked.
         /// </summary>
-        public User Team
+        public TournamentTeam Team
         {
             get
             {

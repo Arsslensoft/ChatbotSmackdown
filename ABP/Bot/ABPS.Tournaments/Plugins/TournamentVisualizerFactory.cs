@@ -25,7 +25,7 @@
 // <author>John Gietzen</author>
 //-----------------------------------------------------------------------
 
-namespace Tournaments.Plugins
+namespace ABPS.Tournaments.Plugins
 {
     using System;
 

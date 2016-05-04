@@ -25,7 +25,7 @@
 // <author>John Gietzen</author>
 //-----------------------------------------------------------------------
 
-namespace Tournaments
+namespace ABPS.Tournaments
 {
     /// <summary>
     /// Describes the current state of a pairings generator.

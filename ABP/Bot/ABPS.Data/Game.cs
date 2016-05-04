@@ -10,6 +10,7 @@ namespace ABPS.Data
     {
         Pending,
         Playing,
+        Voting,
         Completed
         
     }
@@ -25,18 +26,10 @@ namespace ABPS.Data
 
        public Game()
        {
-           Scores = new List<UserScore>();
+           Players = new List<Player>();
+           Votes = new List<Vote>();
        }
-       public Game(UserScore teamA,UserScore teamB)
-        {
-            Scores = new List<UserScore>();
-            teamA.GameId = Id;
-            teamB.GameId = Id;
-            teamA.Game = this;
-            teamB.Game = this;
-            Scores.Add(teamA);
-            Scores.Add(teamB);
-        }
+  
         public long? RoundId { get; set; }
         public virtual Round Round { get; set; }
 
@@ -45,14 +38,17 @@ namespace ABPS.Data
         public DateTime Start { get; set; }
         
         public TimeSpan Duration { get; set; }
+        public TimeSpan PlayerSleepTime { get; set; }
 
         public GamePlayers Winner { get; set; }
 
-  
-
+        public string ChatHistoryFile { get; set; }
 
         [InverseProperty("Game")]
-        public virtual List<UserScore> Scores { get; set; }
+        public virtual List<Vote> Votes { get; set; }
+
+        [InverseProperty("Game")]
+        public virtual List<Player> Players { get; set; }
 
     }
 }

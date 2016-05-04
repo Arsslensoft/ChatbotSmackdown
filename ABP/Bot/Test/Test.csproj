@@ -44,11 +44,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Log4Net\Log4NetConstants.cs" />
+    <Compile Include="Mechanism\Job.cs" />
+    <Compile Include="Mechanism\JobManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ABPS.Aiml\ABPS.Aiml.csproj">
+      <Project>{505ceb00-53f5-4e67-a758-38ebe5204e4a}</Project>
+      <Name>ABPS.Aiml</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

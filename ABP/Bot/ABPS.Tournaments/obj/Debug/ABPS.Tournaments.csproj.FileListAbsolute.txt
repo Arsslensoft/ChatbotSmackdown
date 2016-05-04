@@ -1,0 +1,7 @@
+E:\Research\CBSD\ABP\Bot\ABPS.Tournaments\obj\Debug\ABPS.Tournaments.csprojResolveAssemblyReference.cache
+E:\Research\CBSD\ABP\Bot\ABPS.Tournaments\bin\Debug\ABPS.Tournaments.dll
+E:\Research\CBSD\ABP\Bot\ABPS.Tournaments\bin\Debug\ABPS.Tournaments.pdb
+E:\Research\CBSD\ABP\Bot\ABPS.Tournaments\bin\Debug\ABPS.Tournaments.dll.CodeAnalysisLog.xml
+E:\Research\CBSD\ABP\Bot\ABPS.Tournaments\bin\Debug\ABPS.Tournaments.dll.lastcodeanalysissucceeded
+E:\Research\CBSD\ABP\Bot\ABPS.Tournaments\obj\Debug\ABPS.Tournaments.dll
+E:\Research\CBSD\ABP\Bot\ABPS.Tournaments\obj\Debug\ABPS.Tournaments.pdb

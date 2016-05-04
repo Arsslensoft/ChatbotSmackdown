@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Job.cs" />
+    <Compile Include="JobManager.cs" />
+    <Compile Include="Tournament\TournamentInstance.cs" />
+    <Compile Include="Tournament\GameDriver.cs" />
+    <Compile Include="Tournament\RoundInstance.cs" />
+    <Compile Include="Tournament\GameInstance.cs" />
     <Compile Include="HTTPServer.cs" />
     <Compile Include="HttpService.cs" />
     <Compile Include="Platform.cs" />
@@ -58,22 +64,7 @@
     <Compile Include="Chatbot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response.cs" />
-    <Compile Include="TournamentManager.cs" />
-    <Compile Include="Tournament\EliminationTournament.cs" />
-    <Compile Include="Tournament\Helpers\BracketDecider.cs" />
-    <Compile Include="Tournament\Helpers\ByeDecider.cs" />
-    <Compile Include="Tournament\Helpers\ContinuationDecider.cs" />
-    <Compile Include="Tournament\Helpers\EliminationDecider.cs" />
-    <Compile Include="Tournament\Helpers\EliminationNode.cs" />
-    <Compile Include="Tournament\Helpers\LoserNode.cs" />
-    <Compile Include="Tournament\Helpers\NodeMeasurement.cs" />
-    <Compile Include="Tournament\Helpers\PassThroughDecider.cs" />
-    <Compile Include="Tournament\Helpers\StayDecider.cs" />
-    <Compile Include="Tournament\Helpers\TeamDecider.cs" />
-    <Compile Include="Tournament\Helpers\TeamRanking.cs" />
-    <Compile Include="Tournament\Helpers\WinnerNode.cs" />
-    <Compile Include="Tournament\Plugins\EliminationTournamentFactory.cs" />
-    <Compile Include="Tournament\Plugins\StandardTournamentsPluginEnumerator.cs" />
+    <Compile Include="Tournament\TournamentManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ABPS.Aiml\ABPS.Aiml.csproj">
@@ -83,6 +74,10 @@
     <ProjectReference Include="..\ABPS.Data\ABPS.Data.csproj">
       <Project>{7e62f30e-bc53-4598-ba0d-78764ac15755}</Project>
       <Name>ABPS.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ABPS.Tournaments\ABPS.Tournaments.csproj">
+      <Project>{826afcf0-646a-4bbf-a2ac-70dcf4ab4f52}</Project>
+      <Name>ABPS.Tournaments</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

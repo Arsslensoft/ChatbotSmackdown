@@ -25,7 +25,7 @@
 // <author>John Gietzen</author>
 //-----------------------------------------------------------------------
 
-namespace Tournaments.Graphics
+namespace ABPS.Tournaments.Graphics
 {
     using System;
     using System.Drawing;

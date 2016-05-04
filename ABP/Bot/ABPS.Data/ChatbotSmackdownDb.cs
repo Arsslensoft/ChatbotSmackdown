@@ -8,9 +8,9 @@ namespace ABPS.Data
     {
         static ChatbotSmackdownDb()
         {
-           // Database.SetInitializer<ChatbotSmackdownDb>(new CreateDatabaseIfNotExists<ChatbotSmackdownDb>());
+     //   Database.SetInitializer<ChatbotSmackdownDb>(new CreateDatabaseIfNotExists<ChatbotSmackdownDb>());
 
-            Database.SetInitializer<ChatbotSmackdownDb>(null);
+       Database.SetInitializer<ChatbotSmackdownDb>(null);
         }
 
         public ChatbotSmackdownDb() : base(CreateConnection(), true)
@@ -37,7 +37,9 @@ namespace ABPS.Data
         public DbSet<Visitor> Visitors { get; set; }
         public DbSet<Vote> Votes { get; set; }
         public DbSet<Round> Rounds { get; set; }
-        public DbSet<UserScore> UserScores { get; set; }
+        public DbSet<Player> Players { get; set; }
+        public DbSet<Ranking> Rankings { get; set; }
+
 
         private static DbConnection CreateConnection()
         {

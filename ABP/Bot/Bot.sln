@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABPS.Aiml", "ABPS.Aiml\ABPS.Aiml.csproj", "{505CEB00-53F5-4E67-A758-38EBE5204E4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABPS.Tournaments", "ABPS.Tournaments\ABPS.Tournaments.csproj", "{826AFCF0-646A-4BBF-A2AC-70DCF4AB4F52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{505CEB00-53F5-4E67-A758-38EBE5204E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{505CEB00-53F5-4E67-A758-38EBE5204E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{505CEB00-53F5-4E67-A758-38EBE5204E4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{826AFCF0-646A-4BBF-A2AC-70DCF4AB4F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{826AFCF0-646A-4BBF-A2AC-70DCF4AB4F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{826AFCF0-646A-4BBF-A2AC-70DCF4AB4F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{826AFCF0-646A-4BBF-A2AC-70DCF4AB4F52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

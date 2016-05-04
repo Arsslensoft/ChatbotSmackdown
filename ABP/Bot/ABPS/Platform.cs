@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ABPS.Utils;
 using System.Timers;
+using System.Threading;
 namespace ABPS
 {
    public static class Platform
@@ -13,7 +14,23 @@ namespace ABPS
        public static PlatformAPI Api { get; set; }
        public static ChatbotSmackdownDb DBManager { get; set; }
        public static HttpService Service { get; set; }
-        public static System.Timers.Timer UpdateTimer {get;set;}
+       public static System.Timers.Timer UpdateTimer {get;set;}
+       public static List<Chatbot> Chatbots { get; set; }
+
+
+
+       public static void ReloadBots()
+       {
+           Chatbots.Clear();
+           Load();
+           foreach (User bot in DBManager.Users.ToList())
+           {
+               Chatbot chat = new Chatbot(bot);
+               Chatbots.Add(chat);
+          
+             chat.ReloadBot();
+           }
+       }
        public static void Initialize(int port,  int update_timeout)
        {
            DBManager = new ChatbotSmackdownDb();
@@ -26,7 +43,10 @@ namespace ABPS
 
            Service = new HttpService(port);
                 Load();
-    
+                Chatbots = new List<Chatbot>();
+                ReloadBots();
+                TournamentManager.Initialize();
+                TournamentManager.Reload();
        }
        public static void Load()
        {
@@ -38,11 +58,14 @@ namespace ABPS
            DBManager.Users.Load();
            DBManager.Visitors.Load();
            DBManager.Votes.Load();
+
        }
+
         
        public static void Start()
        {
            Service.listen();
+        
        }
 
        public static void OnTimedEvent(Object source, ElapsedEventArgs e)

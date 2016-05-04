@@ -25,12 +25,12 @@
 // <author>John Gietzen</author>
 //-----------------------------------------------------------------------
 
-namespace Tournaments
+namespace ABPS.Tournaments
 {
     using System;
     using System.Collections.Generic;
     using System.Drawing;
-    using Tournaments.Graphics;
+    using ABPS.Tournaments.Graphics;
 
     /// <summary>
     /// Specifies the interface required for a tournament visualizer.
@@ -53,7 +53,7 @@ namespace Tournaments
         /// <exception cref="ArgumentNullException">When either the teams or the rounds parameter is null.</exception>
         /// <exception cref="InvalidTournamentStateException">When the state teams and rounds passed are in a state considered to be invalid to the tournament visualizer</exception>
         /// <remarks>The visualizer may be as lax or as strict in the enforcement of tournament state as the implementer desires.  However, it is recommended that implementations be lenient in what they accept.</remarks>
-        void LoadState(IEnumerable<User> teams, IList<TournamentRound> rounds);
+        void LoadState(IEnumerable<TournamentTeam> teams, IList<TournamentRound> rounds);
 
         /// <summary>
         /// Renders the tournament to an IGraphics object.

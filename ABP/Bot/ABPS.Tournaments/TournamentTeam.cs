@@ -25,7 +25,7 @@
 // <author>John Gietzen</author>
 //-----------------------------------------------------------------------
 
-namespace Tournaments
+namespace ABPS.Tournaments
 {
     using System.Diagnostics;
 
@@ -33,7 +33,7 @@ namespace Tournaments
     /// Describes a team that may participate in a tournament.
     /// </summary>
     [DebuggerDisplay("[Team {this.TeamId} @ {this.Rating}]")]
-    public sealed class User
+    public sealed class TournamentTeam
     {
         /// <summary>
         /// Holds the unique, application-specific identifier of the team.
@@ -45,16 +45,16 @@ namespace Tournaments
         /// </summary>
         /// <param name="teamId">The unique, application-specific identifier of the team.</param>
         /// <param name="rating">The team's current rating pertaining to a specific tournament.</param>
-        public User(long teamId, int? rating)
+        public TournamentTeam(long teamId, long? rating)
         {
             this.teamId = teamId;
-            this.BotScore = rating;
+            this.Rating = rating;
         }
 
         /// <summary>
         /// Gets the unique, application-specific identifier of the team.
         /// </summary>
-        public long Id
+        public long TeamId
         {
             get
             {
@@ -65,7 +65,7 @@ namespace Tournaments
         /// <summary>
         /// Gets or sets the team's current rating or seed pertaining to a specific tournament or league.
         /// </summary>
-        public int? BotScore
+        public long? Rating
         {
             get;
             set;

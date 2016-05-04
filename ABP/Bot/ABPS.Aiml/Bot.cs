@@ -262,10 +262,14 @@ namespace ABPS.Aiml
         {
             get
             {
-                return Path.Combine(Environment.CurrentDirectory, this.GlobalSettings.grabSetting("aimldirectory"));
+                return Path.Combine(BotPath, this.GlobalSettings.grabSetting("aimldirectory"));
             }
         }
-
+        public string BotPath
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// The directory to look in for the various XML configuration files
         /// </summary>
@@ -273,7 +277,7 @@ namespace ABPS.Aiml
         {
             get
             {
-                return Path.Combine(Environment.CurrentDirectory, this.GlobalSettings.grabSetting("configdirectory"));
+                return Path.Combine(BotPath, this.GlobalSettings.grabSetting("configdirectory"));
             }
         }
 
@@ -284,7 +288,7 @@ namespace ABPS.Aiml
         {
             get
             {
-                return Path.Combine(Environment.CurrentDirectory, this.GlobalSettings.grabSetting("logdirectory"));
+                return Path.Combine(BotPath, this.GlobalSettings.grabSetting("logdirectory"));
             }
         }
 
@@ -329,8 +333,9 @@ namespace ABPS.Aiml
         /// <summary>
         /// Ctor
         /// </summary>
-        public Bot()
+        public Bot(string path)
         {
+            BotPath = path;
             this.setup();  
         }
 
@@ -627,7 +632,7 @@ namespace ABPS.Aiml
         /// <returns>the result to be output to the user</returns>
         public Result Chat(string rawInput, string UserGUID)
         {
-            Request request = new Request(rawInput, new User(UserGUID, this), this);
+            Request request = new Request(rawInput, new User(UserGUID, this, ""), this);
             return this.Chat(request);
         }
 

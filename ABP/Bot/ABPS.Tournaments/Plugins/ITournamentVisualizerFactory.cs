@@ -25,7 +25,7 @@
 // <author>John Gietzen</author>
 //-----------------------------------------------------------------------
 
-namespace Tournaments.Plugins
+namespace ABPS.Tournaments.Plugins
 {
     /// <summary>
     /// Describes a factory for creating a tournament visualizer.

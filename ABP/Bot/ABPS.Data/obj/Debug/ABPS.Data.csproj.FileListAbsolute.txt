@@ -9,3 +9,4 @@ E:\Research\CBSD\ABP\Bot\ABPS.Data\bin\Debug\MySql.Data.Entity.EF6.pdb
 E:\Research\CBSD\ABP\Bot\ABPS.Data\bin\Debug\Newtonsoft.Json.xml
 E:\Research\CBSD\ABP\Bot\ABPS.Data\obj\Debug\ABPS.Data.dll
 E:\Research\CBSD\ABP\Bot\ABPS.Data\obj\Debug\ABPS.Data.pdb
+E:\Research\CBSD\ABP\Bot\ABPS.Data\obj\Debug\ABPS.Data.csprojResolveAssemblyReference.cache

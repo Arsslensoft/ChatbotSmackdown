@@ -6,13 +6,19 @@ using System.Text;
 
 namespace ABPS.Data
 {
+    public enum CompetitionStatus
+    {
+  
+        Ready,
+        Started,
+        Completed
+    }
   public class Competition : DatabaseObject
     {
       public DateTime Start { get; set; }
-      public DateTime End { get; set; }
       public string Name { get; set; }
       public string Description { get; set; }
-
+      public CompetitionStatus Status { get; set; }
       // Prize
       public long PointsPerWin { get; set; }
       public long Prize { get; set; }
@@ -29,5 +35,8 @@ namespace ABPS.Data
 
       [InverseProperty("Competition")]
       public virtual List<Participation> Participations { get; set; }
+
+      [InverseProperty("Competition")]
+      public virtual List<Ranking> Rankings { get; set; }
     }
 }

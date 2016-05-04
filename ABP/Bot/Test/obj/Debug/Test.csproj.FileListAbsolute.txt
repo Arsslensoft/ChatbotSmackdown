@@ -1,0 +1,7 @@
+E:\Research\CBSD\ABP\Bot\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+E:\Research\CBSD\ABP\Bot\Test\bin\Debug\Test.exe
+E:\Research\CBSD\ABP\Bot\Test\bin\Debug\Test.pdb
+E:\Research\CBSD\ABP\Bot\Test\bin\Debug\ABPS.Aiml.dll
+E:\Research\CBSD\ABP\Bot\Test\bin\Debug\ABPS.Aiml.pdb
+E:\Research\CBSD\ABP\Bot\Test\obj\Debug\Test.exe
+E:\Research\CBSD\ABP\Bot\Test\obj\Debug\Test.pdb

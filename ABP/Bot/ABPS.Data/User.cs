@@ -31,7 +31,7 @@ namespace ABPS.Data
            Personalities = new List<Personality>();
            AimlSets = new List<AimlSet>();
            Participations = new List<Participation>();
-           Scores = new List<UserScore>();
+           Scores = new List<Player>();
            Visitors = new List<Visitor>();
            Votes = new List<Vote>();
        }
@@ -47,7 +47,7 @@ namespace ABPS.Data
        public virtual List<Participation> Participations { get; set; }
 
        [InverseProperty("Bot")]
-       public virtual List<UserScore> Scores { get; set; }
+       public virtual List<Player> Scores { get; set; }
 
        [InverseProperty("Bot")]
        public virtual List<Visitor> Visitors { get; set; }
@@ -56,6 +56,9 @@ namespace ABPS.Data
        [InverseProperty("Bot")]
        public virtual List<Vote> Votes { get; set; }
 
+
+       [InverseProperty("Bot")]
+       public virtual List<Ranking> Rankings { get; set; }
 
     }
 }
