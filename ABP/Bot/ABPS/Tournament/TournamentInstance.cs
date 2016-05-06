@@ -13,7 +13,6 @@ namespace ABPS
     {
 
       public Thread TournamentThread { get; set; }
-      public TimeSpan GameDuration { get; set; }
       public RoundInstance CurrentRound { get; set; }
       public Tournaments.Standard.EliminationTournament Manager { get; set; }
       public Competition Competition;
@@ -31,10 +30,11 @@ namespace ABPS
             ExecutedRounds = new List<RoundInstance>();
             ExecutedGames = new List<GameInstance>();
             Competition = comp;
-            GameDuration = new TimeSpan(0, 1, 0);
+         
         }
         private void CreateRound(TournamentRound rnd, ref Round round)
         {
+            Platform.LogEvent("Creating round ", ConsoleColor.DarkCyan);
 
              round = new Round();
             round.CompetitionId = Competition.Id;
@@ -48,15 +48,15 @@ namespace ABPS
             foreach (TournamentPairing pair in rnd.Pairings)
             {
                 Game game = new Game();
-                game.Duration = GameDuration;
+                game.Duration = PlatformSettings.GameDuration;
                 game.Start = game_start;
                 game_start = game_start.AddMinutes(5);
                 game.RoundId = round.Id;
                 game.Round = round;
-                game.Winner = GamePlayers.Unknown;
+                game.WinnerId = 1;
                 game.Status = GameStatus.Pending;
                 game.ChatHistoryFile = "";
-                game.PlayerSleepTime = new TimeSpan(0, 0, 2);
+                game.PlayerSleepTime = PlatformSettings.PlayerPause;
                 Platform.DBManager.Games.Add(game);
                 // Create players
                 foreach (TournamentTeamScore team in pair.TeamScores)
@@ -95,8 +95,11 @@ namespace ABPS
 
                 TournamentRound rd = Manager.CreateNextRound(null);
                 // Finals
-                if (rd.Pairings[0].TeamScores.Count == 1)
+                if (rd == null || rd.Pairings[0].TeamScores.Count == 1)
+                {
+                    CurrentRound = null;
                     return false;
+                }
                 else
                 {
                     Round round = null;
@@ -117,28 +120,64 @@ namespace ABPS
         }
           private void StartCurrentRound()
           {
-
+              Platform.LogEvent("Current round started  "+Competition.Name, ConsoleColor.DarkCyan);
          if(CurrentRound != null)
               CurrentRound.Start();
 
 
           }
+          private void IncrementPlayerScore(Dictionary<long, double> myDict, long player, double score)
+          {
+              if (myDict.ContainsKey(player))
+                  myDict[player] += score;
+              else myDict.Add(player, score);
+          }
           private void RewardPlayers()
           {
-           
-              foreach (TournamentRanking rank in Manager.GenerateRankings())
+              Platform.LogEvent("Rewarding players "+Competition.Name, ConsoleColor.DarkCyan);
+              Dictionary<long, double> myDict = new Dictionary<long, double>();
+       
+
+        
+              foreach (Round rnd in Competition.Rounds)
               {
-                  List<User> u = Platform.DBManager.Users.Where(x => x.Id == rank.Team.TeamId).ToList();
-                  u[0].BotScore = (long)((Competition.ParticipantNumber - rank.Rank) * Competition.Prize);
+                  foreach (Game gm in rnd.Games)
+                  {
+                      List<Player> won = gm.Players.Where(x => x.BotId == gm.WinnerId).ToList();
+                      List<Player> lost = gm.Players.Where(x => x.BotId != gm.WinnerId).ToList();
 
+                
+                          IncrementPlayerScore(myDict,won[0].BotId.Value, (double)Competition.PointsPerWin);
+                          IncrementPlayerScore(myDict, lost[0].BotId.Value, 0);
+                    
+                  }
+              }
 
+          
+
+              // last win
+              Game last_game = Competition.Rounds[Competition.Rounds.Count - 1].Games[0];
+              List<Player> swon = last_game.Players.Where(x => x.BotId == last_game.WinnerId).ToList();
+           
+              IncrementPlayerScore(myDict, swon[0].BotId.Value, (double)Competition.Prize);
+         
+
+              var sortedDict = from entry in myDict orderby entry.Value ascending select entry;
+              int rank = sortedDict.Count();
+              // rank all users
+              foreach (KeyValuePair<long, double> pair in sortedDict)
+              {
+                  List<User> u = Platform.DBManager.Users.Where(x => x.Id == pair.Key).ToList();
+                  u[0].BotScore += (long)pair.Value;
                   Ranking rnk = new Ranking();
                   rnk.BotId = u[0].Id;
                   rnk.CompetitionId = Competition.Id;
-                  rnk.Rank = rank.Rank;
+                  rnk.Rank = rank;
 
                   Platform.DBManager.Rankings.Add(rnk);
+                  rank--;
               }
+              Competition.Status = CompetitionStatus.Completed;
               Platform.DBManager.SaveChanges();
 
           }
@@ -155,7 +194,11 @@ namespace ABPS
             {
                 if (CreateNextRound())
                     StartCurrentRound();
-                else RewardPlayers();
+                else
+                {
+                    RewardPlayers();
+                    CurrentThread.Abort();
+                }
             }
             catch (Exception ex)
             {
@@ -165,9 +208,9 @@ namespace ABPS
         public override bool IsRepeatable()
         {
             if (CurrentRound != null)
-                return CurrentRound.CurrentRound.Pairings[0].TeamScores.Count != 1;
+                return CurrentRound.CurrentRound.Pairings[0].TeamScores.Count != 1 || Competition.Status != CompetitionStatus.Completed;
             else
-                 return true;
+                return Competition.Status != CompetitionStatus.Completed;
         }
         public override bool CanStart()
         {
@@ -175,7 +218,7 @@ namespace ABPS
         }
         public override int GetRepetitionIntervalTime()
         {
-            return (int)(new TimeSpan(23,59,0).TotalMilliseconds);
+            return (int)(PlatformSettings.RoundInterval.TotalMilliseconds);
         }
     }
 }

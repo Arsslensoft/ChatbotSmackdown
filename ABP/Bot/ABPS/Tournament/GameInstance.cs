@@ -107,24 +107,24 @@ namespace ABPS
           {
               if (Generator.Next(0, 1) == 1)
               {
-                  Game.Winner = GamePlayers.Second;
+                  Game.WinnerId = Game.Players[1].BotId;
                   Game.Players[1].Score += Competition.PointsPerWin;
               }
               else
               {
-                  Game.Winner = GamePlayers.First;
+                  Game.WinnerId = Game.Players[0].BotId;
                   Game.Players[0].Score += Competition.PointsPerWin;
               }
               
           }
           else if (first_votes > second_votes)
           {
-              Game.Winner = GamePlayers.First;
+              Game.WinnerId = Game.Players[0].BotId;
               Game.Players[0].Score += Competition.PointsPerWin;
           }
           else
           {
-              Game.Winner = GamePlayers.Second;
+              Game.WinnerId = Game.Players[1].BotId;
               Game.Players[1].Score += Competition.PointsPerWin;
           }
 

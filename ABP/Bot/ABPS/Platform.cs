@@ -9,6 +9,14 @@ using System.Timers;
 using System.Threading;
 namespace ABPS
 {
+    public static class PlatformSettings
+    {
+        public static TimeSpan GameSpacing = new TimeSpan(0, 0, 2);
+        public static TimeSpan GameDuration = new TimeSpan(0,0,15);
+        public static TimeSpan PlayerPause = new TimeSpan(0, 0, 2);
+        public static TimeSpan RoundInterval = new TimeSpan(0, 0,30);
+       
+    }
    public static class Platform
     {
        public static PlatformAPI Api { get; set; }
@@ -18,18 +26,30 @@ namespace ABPS
        public static List<Chatbot> Chatbots { get; set; }
 
 
+       public static void LogEvent(string ev, ConsoleColor color)
+       {
+           Console.ForegroundColor = ConsoleColor.Green;
+           Console.Write("["+DateTime.Now + "] : ");
+           Console.ForegroundColor = color;
+           Console.Write(ev);
+           Console.ForegroundColor = ConsoleColor.White;
+           Console.WriteLine();
+       }
+       public static void AddBot(User bot)
+       {
+        
+           Chatbot chat = new Chatbot(bot);
+           Chatbots.Add(chat);
 
+           chat.ReloadBot();
+       }
        public static void ReloadBots()
        {
            Chatbots.Clear();
            Load();
            foreach (User bot in DBManager.Users.ToList())
-           {
-               Chatbot chat = new Chatbot(bot);
-               Chatbots.Add(chat);
-          
-             chat.ReloadBot();
-           }
+               AddBot(bot);
+   
        }
        public static void Initialize(int port,  int update_timeout)
        {

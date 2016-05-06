@@ -41,6 +41,7 @@ namespace ABPS
                                 // create thread for this job execution method
                                 thread = new Thread(new ThreadStart(instanceJob.ExecuteJob));
                                 // start thread executing the job
+                                instanceJob.CurrentThread = thread;
                                 thread.Start();
                                // log.Debug(String.Format("The Job \"{0}\" has its thread started successfully.", instanceJob.GetName()));
                             }
@@ -70,6 +71,7 @@ namespace ABPS
             try
             {
                 Thread thread = new Thread(new ThreadStart(job.ExecuteJob));
+                job.CurrentThread = thread;
                 // start thread executing the job
                 thread.Start();
             }

@@ -13,6 +13,7 @@ namespace ABPS
     /// </summary>
     public abstract class Job
     {
+        public Thread CurrentThread { get; set; }
         /// <summary>
         /// Execute the Job itself, one ore repeatedly, depending on
         /// the job implementation.

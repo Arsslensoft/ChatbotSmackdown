@@ -17,7 +17,15 @@ namespace ABPS
            Code = code;
        }
     }
-
+   public class GoodResponse : Response
+   {
+       public string message { get; set; }
+       public GoodResponse(string code, string message)
+           : base(code)
+       {
+           this.message = message;
+       }
+   }
    public class ErrorResponse : Response
    {
        public string error { get; set; }

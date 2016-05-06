@@ -27,8 +27,7 @@ namespace ConsoleApplication1
 
             teams.Add(new User(0, 100));
             teams.Add(new User(1, 100));
-            teams.Add(new User(2, 100));
-            teams.Add(new User(3, 100));
+
             
             generator.Reset();
             generator.LoadState(teams, rounds);
@@ -36,8 +35,7 @@ namespace ConsoleApplication1
             TournamentRound round = generator.CreateNextRound(null);
             round.Pairings[0].TeamScores[0].Score = new HighestPointsScore(200);
             round.Pairings[0].TeamScores[1].Score = new HighestPointsScore(100);
-            round.Pairings[1].TeamScores[0].Score = new HighestPointsScore(100);
-            round.Pairings[1].TeamScores[1].Score = new HighestPointsScore(200);
+
             rounds.Add(round);
 
             var standings = generator.GenerateRankings();

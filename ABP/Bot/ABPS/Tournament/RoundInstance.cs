@@ -47,6 +47,8 @@ namespace ABPS
        /// </summary>
         public void Start()
         {
+            Platform.LogEvent("Round " + Round.Id.ToString() + " Started ", ConsoleColor.DarkCyan);
+
            TournamentPairing pair = null;
             // start all games
             foreach (Game game in Round.Games)
@@ -57,10 +59,10 @@ namespace ABPS
                     GameInstances.Add(gi);
                     TInstance.ExecutedGames.Add(gi);
                     gi.StartGame();
-                    Thread.Sleep(300000); // wait 5 minutes
+                    Thread.Sleep(PlatformSettings.GameSpacing);
                 }
             }
-   
+           
         }
 
           /// <summary>
@@ -68,6 +70,7 @@ namespace ABPS
        /// </summary>
         public void CheckResults()
         {
+            Platform.LogEvent("Round " + Round.Id.ToString() + " CheckResults ", ConsoleColor.DarkCyan);
             foreach (GameInstance gi in GameInstances)
                 gi.CloseVoteAndSetResult();
         }

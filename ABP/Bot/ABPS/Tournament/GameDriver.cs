@@ -63,7 +63,8 @@ namespace ABPS
       /// </summary>
       public void InitializeGame()
       {
-      
+        
+
           CurrentGameHistory = new GameHistory();
         
           FirstUser = Game.Players[0].Bot;
@@ -77,6 +78,7 @@ namespace ABPS
           First.InitializeUserBot(Second.BotEngine);
           First.IsInGame = true;
           Second.IsInGame = true;
+          Platform.LogEvent("Game " + Game.Id.ToString() + " Initialized ", ConsoleColor.DarkCyan);
       }
 
       public DateTime Start { get; set; }
@@ -104,6 +106,8 @@ namespace ABPS
 
           First.IsInGame = false;
           Second.IsInGame = false;
+          Platform.LogEvent("Game " + Game.Id.ToString() + " Started ", ConsoleColor.DarkCyan);
+
       }
 
       /// <summary>
@@ -116,6 +120,8 @@ namespace ABPS
 
           Game.ChatHistoryFile = file;
           Platform.DBManager.SaveChanges();
+          Platform.LogEvent("Game " + Game.Id.ToString() + " Finalized ", ConsoleColor.DarkCyan);
+
       }
 
     }

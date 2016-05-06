@@ -494,20 +494,20 @@ namespace Tournaments.Standard
         {
             if (this.loadedTeams.Count >= 2)
             {
-                //var maxLevel = this.loadedNodes.Max(n => n.Level);
+                var maxLevel = this.loadedNodes.Max(n => n.Level);
 
-                //var ranks = from t in this.loadedTeams
-                //            let node = FindTeamsHighestNode(t.TeamId)
-                //            let finished = node.Locked && node.IsDecided
-                //            let winner = node.IsDecided && node.Team != null && node.Team.TeamId == t.TeamId
-                //            let round = maxLevel - node.Level
-                //            let rank = node.Level + (winner ? 1 : 2)
-                //            orderby rank
-                //            select new TournamentRanking(t, rank, (finished ? (winner ? "Winner" : "Eliminated in heat " + round) : "Continuing"));
+                var ranks = from t in this.loadedTeams
+                            let node = FindTeamsHighestNode(t.Id)
+                            let finished = node.Locked && node.IsDecided
+                            let winner = node.IsDecided && node.Team != null && node.Team.Id == t.Id
+                            let round = maxLevel - node.Level
+                            let rank = node.Level + (winner ? 1 : 2)
+                            orderby rank
+                            select new TournamentRanking(t, rank, (finished ? (winner ? "Winner" : "Eliminated in heat " + round) : "Continuing"));
 
-                //return ranks;
+                return ranks;
 
-                yield break;
+               // yield break;
             }
             else
             {
@@ -515,15 +515,15 @@ namespace Tournaments.Standard
             }
         }
 
-        //private EliminationNode FindTeamsHighestNode(long teamId)
-        //{
-        //    return (from n in this.loadedNodes
-        //            let d = n.Decider as ContinuationDecider
-        //            where d != null
-        //            where ChildAMatches(d, teamId) || ChildBMatches(d, teamId)
-        //            orderby n.Level
-        //            select n).FirstOrDefault();
-        //}
+        private EliminationNode FindTeamsHighestNode(long teamId)
+        {
+            return (from n in this.loadedNodes
+                    let d = n.Decider as ContinuationDecider
+                    where d != null
+                    where ChildAMatches(d, teamId) || ChildBMatches(d, teamId)
+                    orderby n.Level
+                    select n).FirstOrDefault();
+        }
 
         public SizeF Measure(IGraphics graphics, TournamentNameTable teamNames)
         {

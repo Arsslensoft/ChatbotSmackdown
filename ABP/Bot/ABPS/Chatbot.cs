@@ -45,6 +45,7 @@ namespace ABPS
       }
       private void ReloadPersonality()
       {
+          Platform.LogEvent("Loading personality " + User.BotName, ConsoleColor.Gray);
           List<Personality> personalities = Platform.DBManager.Personalities.Where(x => x.BotId == User.Id).ToList();
           foreach (Personality ai in personalities)
           {
@@ -55,21 +56,23 @@ namespace ABPS
       }
       private void ReloadAimlSets()
       {
-          //List<AimlSet> aimls = Platform.DBManager.AimlSets.Where(x => x.BotId == User.Id).ToList();
-          //foreach (AimlSet ai in aimls)
-          //{
-          //    if (ai.Load)
-          //    {
-          //        XmlDocument doc = new XmlDocument();
-          //        doc.Load(Path.Combine(AIMLPath, ai.AimlFile));
-          //        BotEngine.loadAIMLFromXML(doc, Path.Combine(AIMLPath, ai.AimlFile));
-          //    }
-          //}
-          BotEngine.loadAIMLFromFiles();
+          Platform.LogEvent("Loading aiml " + User.BotName, ConsoleColor.Gray);
+          List<AimlSet> aimls = Platform.DBManager.AimlSets.Where(x => x.BotId == User.Id).ToList();
+          foreach (AimlSet ai in aimls)
+          {
+              if (ai.Load)
+              {
+                  XmlDocument doc = new XmlDocument();
+                  doc.Load(Path.Combine(AIMLPath, ai.AimlFile));
+                  BotEngine.loadAIMLFromXML(doc, Path.Combine(AIMLPath, ai.AimlFile));
+              }
+          }
+          //BotEngine.loadAIMLFromFiles();
       }
       public void ReloadBot()
       {
-          Console.WriteLine("Loading bot " + User.BotName);
+
+         Platform.LogEvent("Loading bot " + User.BotName, ConsoleColor.Magenta );
           BotEngine = new Bot(BotPath);
           BotEngine.isAcceptingUserInput = false;
           ReloadPersonality();
@@ -78,7 +81,7 @@ namespace ABPS
           Visitors.Clear();
           foreach (Visitor v in User.Visitors)
               AddVisitor(v);
-          Console.WriteLine("Bot " + User.BotName+" loaded");
+          Platform.LogEvent("Bot " + User.BotName+" loaded", ConsoleColor.DarkMagenta);
       }
       public void InitializeUserBot(Bot opponent)
       {

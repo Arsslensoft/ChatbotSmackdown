@@ -14,13 +14,7 @@ namespace ABPS.Data
         Completed
         
     }
-    public enum GamePlayers
-    {
-        Unknown,
-       First,
-        Second
 
-    }
    public class Game : DatabaseObject
     {
 
@@ -40,7 +34,8 @@ namespace ABPS.Data
         public TimeSpan Duration { get; set; }
         public TimeSpan PlayerSleepTime { get; set; }
 
-        public GamePlayers Winner { get; set; }
+        public long? WinnerId { get; set; }
+        public virtual User Winner { get; set; }
 
         public string ChatHistoryFile { get; set; }
 

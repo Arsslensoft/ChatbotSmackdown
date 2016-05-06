@@ -18,12 +18,63 @@ namespace ABPS
       
        }
 
+       public string AddBot(string id)
+       {
+           try
+           {
+               long bid = long.Parse(id);
+               Platform.LogEvent("Add bot "+id, ConsoleColor.DarkCyan);
 
+               List<User> bots = Platform.DBManager.Users.Where(x => x.Id == bid).ToList();
+               if (bots.Count > 0)
+               {
+                   List<Chatbot> cb = Platform.Chatbots.Where(x => x.User.Id == bid).ToList();
+                   if (cb.Count == 0)
+                   {
+                       Platform.AddBot(bots[0]);
+                       return JsonConvert.SerializeObject(new GoodResponse("OK", "The bot has been successfully added"));
+                   }
+                   else
+                       return JsonConvert.SerializeObject(new ErrorResponse("BOT_EXIST", "This bot already exists"));
+           
+            
+               }
+               else
+                   return JsonConvert.SerializeObject(new ErrorResponse("BOT_NOT_EXIST", "This bot does not exist"));
+           }
+           catch (Exception ex)
+           {
+               return JsonConvert.SerializeObject(new ErrorResponse("FAILED", ex.Message));
+           }
 
+       }
+       public string ReloadBot(string id)
+       {
+           try
+           {
+               Platform.LogEvent("Reload bot " + id, ConsoleColor.DarkCyan);
+               long bid = long.Parse(id);
+               List<User> bots = Platform.DBManager.Users.Where(x => x.Id == bid).ToList();
+               if (bots.Count > 0)
+               {
+                   Chatbot cb = Platform.Chatbots.Where(x => x.User.Id == bid).ToList()[0];
+                   cb.ReloadBot();
+                   return JsonConvert.SerializeObject(new GoodResponse("OK", "The bot has been successfully reloaded"));
+               }
+               else
+                   return JsonConvert.SerializeObject(new ErrorResponse("BOT_NOT_EXIST", "This bot does not exist"));
+           }
+           catch (Exception ex)
+           {
+               return JsonConvert.SerializeObject(new ErrorResponse("FAILED", ex.Message));
+           }
+
+       }
        public string GetBotInfo(string id)
        {
            try
            {
+
                long bid = long.Parse(id);
                List<User> bots = Platform.DBManager.Users.Where(x => x.Id == bid).ToList();
                if (bots.Count > 0)
@@ -43,6 +94,7 @@ namespace ABPS
            try
 
            {
+
                long bid =long.Parse(id);
                List<User> bots = Platform.DBManager.Users.Where(x => x.Id == bid ).ToList();
                if (bots.Count > 0)
@@ -156,6 +208,10 @@ namespace ABPS
        {
            if (method == "status" && nvc["id"] != null)
                return GetBotStatus(nvc["id"]);
+           else if (method == "add" && nvc["id"] != null)
+               return AddBot(nvc["id"]);
+           else if (method == "reload" && nvc["id"] != null)
+               return ReloadBot(nvc["id"]);
            else if (method == "info" && nvc["id"] != null)
                return GetBotInfo(nvc["id"]);
            else if (method == "talk" && nvc["id"] != null && nvc["user"] != null && nvc["message"] != null)
