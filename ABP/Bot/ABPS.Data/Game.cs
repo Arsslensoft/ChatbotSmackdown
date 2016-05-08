@@ -21,7 +21,7 @@ namespace ABPS.Data
        public Game()
        {
            Players = new List<Player>();
-           Votes = new List<Vote>();
+ 
        }
   
         public long? RoundId { get; set; }
@@ -39,8 +39,6 @@ namespace ABPS.Data
 
         public string ChatHistoryFile { get; set; }
 
-        [InverseProperty("Game")]
-        public virtual List<Vote> Votes { get; set; }
 
         [InverseProperty("Game")]
         public virtual List<Player> Players { get; set; }

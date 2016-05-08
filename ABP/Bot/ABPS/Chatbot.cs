@@ -57,7 +57,7 @@ namespace ABPS
       private void ReloadAimlSets()
       {
           Platform.LogEvent("Loading aiml " + User.BotName, ConsoleColor.Gray);
-          List<AimlSet> aimls = Platform.DBManager.AimlSets.Where(x => x.BotId == User.Id).ToList();
+          /*List<AimlSet> aimls = Platform.DBManager.AimlSets.Where(x => x.BotId == User.Id).ToList();
           foreach (AimlSet ai in aimls)
           {
               if (ai.Load)
@@ -66,8 +66,9 @@ namespace ABPS
                   doc.Load(Path.Combine(AIMLPath, ai.AimlFile));
                   BotEngine.loadAIMLFromXML(doc, Path.Combine(AIMLPath, ai.AimlFile));
               }
-          }
-          //BotEngine.loadAIMLFromFiles();
+          }*/
+        if(User.Id == 1)
+          BotEngine.loadAIMLFromFiles();
       }
       public void ReloadBot()
       {

@@ -46,7 +46,7 @@ namespace ABPS
             if (p.http_url == "/")
 
                 WriteSuccess(p, Encoding.UTF8.GetBytes("<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\"><html><head><title>Access Denied</title></head><body><h1>Access denied</h1><p>You don't have permission to access " + p.http_url + " on this server.</p><hr><address>Arsslensoft Bot Platform - Http Service</address></body></html>"), "text/html");
-            else if (p.http_url.StartsWith("/bot"))
+            else if (p.http_url.StartsWith("/api"))
             {
                 NameValueCollection nameValueCollection = HttpUtility.ParseQueryString(p.http_url.Remove(0,5));
                 string response = Platform.Api.RedirectRequest(nameValueCollection["method"], nameValueCollection);

@@ -16,7 +16,7 @@ namespace ABPS.Data
        public virtual User Bot { get; set; }
 
        public double Score { get; set; }
-
+       public long Votes { get; set; }
      
 
     }

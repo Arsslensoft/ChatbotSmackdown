@@ -6,7 +6,7 @@ using System.Text;
 namespace ABPS.Data
 {
 
-  public  class Vote : DatabaseObject
+ /* public  class Vote : DatabaseObject
     {
         public long? GameId { get; set; }
         public virtual Game Game { get; set; }
@@ -14,7 +14,5 @@ namespace ABPS.Data
 
         public long? BotId { get; set; }
         public virtual User Bot { get; set; }
-        
-
-    }
+    }*/
 }

@@ -33,7 +33,7 @@ namespace ABPS.Data
            Participations = new List<Participation>();
            Scores = new List<Player>();
            Visitors = new List<Visitor>();
-           Votes = new List<Vote>();
+          /* Votes = new List<Vote>();*/
        }
 
        // Relationships
@@ -53,8 +53,8 @@ namespace ABPS.Data
        public virtual List<Visitor> Visitors { get; set; }
 
 
-       [InverseProperty("Bot")]
-       public virtual List<Vote> Votes { get; set; }
+    /*   [InverseProperty("Bot")]
+       public virtual List<Vote> Votes { get; set; }*/
 
 
        [InverseProperty("Bot")]

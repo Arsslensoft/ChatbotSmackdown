@@ -10,13 +10,13 @@ namespace ABPS.Data
     {
        public long? CompetitionId { get; set; }
        public virtual Competition Competition { get; set; }
-
+       public int Number { get; set; }
 
        public Round()
        {
            this.Games = new List<Game>();
        }
-       public int Number { get; set; }
+
      
        [InverseProperty("Round")]
        public virtual List<Game> Games { get; set; }

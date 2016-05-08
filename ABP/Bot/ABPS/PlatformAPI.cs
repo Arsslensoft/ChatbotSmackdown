@@ -115,6 +115,7 @@ namespace ABPS
 
         try
         {
+            message =Encoding.UTF8.GetString( Convert.FromBase64String(message));
             long bid = long.Parse(id);
             List<Chatbot> bots = Platform.Chatbots.Where(x => x.User.Id == bid).ToList();
             if (bots.Count > 0)
@@ -128,7 +129,7 @@ namespace ABPS
                   
                     string answer = bots[0].Answer(message, vis[0]);
 
-                    return JsonConvert.SerializeObject(new BotAnswerResponse("OK",answer));
+                    return JsonConvert.SerializeObject(new BotAnswerResponse("OK",Convert.ToBase64String(Encoding.UTF8.GetBytes( answer))));
 
                 }
                 else

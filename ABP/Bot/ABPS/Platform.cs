@@ -77,7 +77,7 @@ namespace ABPS
            DBManager.Personalities.Load();
            DBManager.Users.Load();
            DBManager.Visitors.Load();
-           DBManager.Votes.Load();
+        
 
        }
 

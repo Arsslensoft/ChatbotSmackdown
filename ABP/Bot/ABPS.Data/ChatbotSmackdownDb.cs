@@ -35,7 +35,6 @@ namespace ABPS.Data
         public DbSet<AimlSet> AimlSets { get; set; }
         public DbSet<Competition> Competitions { get; set; }
         public DbSet<Visitor> Visitors { get; set; }
-        public DbSet<Vote> Votes { get; set; }
         public DbSet<Round> Rounds { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Ranking> Rankings { get; set; }

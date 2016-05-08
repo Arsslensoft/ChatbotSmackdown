@@ -10,11 +10,25 @@ namespace ABPS
 {
    public class Response
     {
+       string tp;
+            [JsonProperty("@type")]
+       public string type
+       {
+           get
+           {
+              return  this.GetType().Name;
+           }
+           set
+           {
+               tp = value;
+           }
+       }
        [JsonProperty("code")]
        public string Code { get; set; }
        public Response(string code)
        {
            Code = code;
+    
        }
     }
    public class GoodResponse : Response

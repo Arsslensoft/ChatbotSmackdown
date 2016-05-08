@@ -35,9 +35,10 @@ namespace ABPS
           Pairing = pair;
       }
 
-      public int GetVoteCount(long? id)
+      public long GetVoteCount(long? id)
       {
-         return Game.Votes.Where(x => x.BotId == id).Count();
+        return Game.Players.Where(x => x.BotId == id).ToList()[0].Votes;
+ 
       }
         /// <summary>
         /// Start's a game
@@ -97,8 +98,8 @@ namespace ABPS
           Game.Status = GameStatus.Completed;
 
           // get votes
-          int first_votes = GetVoteCount(Game.Players[0].BotId);
-          int second_votes = GetVoteCount(Game.Players[1].BotId);
+          long first_votes = GetVoteCount(Game.Players[0].BotId);
+          long second_votes = GetVoteCount(Game.Players[1].BotId);
           // set scores
           Game.Players[0].Score = first_votes * 100;
           Game.Players[1].Score = second_votes * 100;
