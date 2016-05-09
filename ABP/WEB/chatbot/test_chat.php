@@ -7,11 +7,12 @@
  */
 require_once(dirname(__FILE__)."/classes/su.inc.php");
 session_start();
-if(!isset($_SESSION['user']))
-    $_SESSION['user'] = "Unknown";
+if(!isset( $_SESSION['CBSDUserManagement']))
+     $_SESSION['CBSDUserManagement']['user'] = "Unknown";
 
 $bot_answer = "";
-$username = $_SESSION['user'];
+	
+$username = $_SESSION['CBSDUserManagement']['user'];
 $id = "";
 $botname="";
 if(isset($_GET["id"]))

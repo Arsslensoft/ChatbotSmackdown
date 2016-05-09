@@ -48,11 +48,9 @@ namespace ABPS
           Platform.LogEvent("Loading personality " + User.BotName, ConsoleColor.Gray);
           List<Personality> personalities = Platform.DBManager.Personalities.Where(x => x.BotId == User.Id).ToList();
           foreach (Personality ai in personalities)
-          {
-              if (ai.Active)
                   BotEngine.loadSettings(Path.Combine(PersonalityPath ,ai.PersonalityFile));
               
-          }
+          
       }
       private void ReloadAimlSets()
       {

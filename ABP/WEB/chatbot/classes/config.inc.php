@@ -10,7 +10,7 @@
 	$GLOBALS["mysql_hostname"] = "localhost";
 	$GLOBALS["mysql_username"] = "root";
 	$GLOBALS["mysql_password"] = "";
-	$GLOBALS["mysql_database"] = "umtest";
+	$GLOBALS["mysql_database"] = "cbsd";
 
 
 ?>

@@ -10,10 +10,8 @@ namespace ABPS.Data
 
         public long? BotId { get; set; }
         public virtual User Bot { get; set; }
-
         public string PersonalityFile { get; set; }
 
-        public bool Active { get; set; }
 
     }
 }

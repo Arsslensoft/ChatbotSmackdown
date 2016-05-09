@@ -1,8 +1,9 @@
 <?php
 require_once(dirname(__FILE__)."/JsonSerializer/JsonSerializer.php");
 require_once(dirname(__FILE__)."/Enum.obj.php");
+require_once(dirname(__FILE__)."/SimpleOrm.class.php");
 
-
+/*
 class UserRole extends Enum
 {
     const __default = self::User;
@@ -23,10 +24,25 @@ const Playing=1;
 const Voting=2;
 const Completed=3;
 }
+*/
 
+class DataMappingManager
+{
+    public static function initializeMapper($conn = null)
+    {
+    if($conn == null) {
+        // Connect to the database using mysqli
+        $conn = new mysqli($GLOBALS["mysql_hostname"], $GLOBALS["mysql_username"], $GLOBALS["mysql_password"], $GLOBALS["mysql_database"]);
+        if( $conn->connect_error )
+            throw new Exception("MySQL connection could not be established: ".$this->mysqli->connect_error);
+    }
 
-abstract class SerializableModel  {
+SimpleOrm::useConnection($conn, $GLOBALS["mysql_database"]);
 
+    }
+}
+
+abstract class SerializableModel extends SimpleOrm {
     public function serialize() {
         $serializer = new JsonSerializer();
         return $serializer->serialize($this);
@@ -58,81 +74,84 @@ class DatabaseObject extends SerializableModel{
 
 }
 class AimlSet extends DatabaseObject
-{
-    private $BotId;
-    private $AimlFile;
-    private $Load;
+{  protected static  $table = 'aimlsets';
+    public $BotId;
+    public $AimlFile;
 
 }
 class Competition extends DatabaseObject
-{
-private $Start ;
-private $Name;
-private $Description;
-private $Status ;
+{protected static  $table = 'competitions';
+public $Start ;
+public $Name;
+public $Description;
+public $Status ;
       // Prize
-private $PointsPerWin ;
-private $Prize ;
-private $ParticipantNumber ;
+public $PointsPerWin ;
+public $Prize ;
+public $ParticipantNumber ;
 }
 class Game extends  DatabaseObject
-{
-    private $RoundId;
-    private $Status;
-    private $Start ;
-    private $Duration;
-    private $PlayerSleepTime ;
-    private $WinnerId;
-    private $ChatHistoryFile;
+{  protected static  $table = 'games';
+    public $RoundId;
+    public $Status;
+    public $Start ;
+    public $Duration;
+    public $PlayerSleepTime ;
+    public $WinnerId;
+    public $ChatHistoryFile;
 }
 class Participation extends DatabaseObject
-    {
-         private $BotId;
-        private $CompetitionId;
-            private $JoinDate;
+    {  protected static  $table = 'participations';
+         public $BotId;
+        public $CompetitionId;
+            public $JoinDate;
     }
 class Personality extends DatabaseObject
     {
-    private $BotId ;
-    private $PersonalityFile;
-    private $Active;
+    protected static  $table = 'personalities';
+    public $BotId ;
+    public $PersonalityFile;
     }
 class Ranking extends  DatabaseObject
 {
-private $BotId;
-private $CompetitionId;
-private $Rank;
+    protected static  $table = 'rankings';
+public $BotId;
+public $CompetitionId;
+public $Rank;
 }
 class Round extends DatabaseObject
-{
-private $CompetitionId;
-private $Number;
+{  protected static  $table = 'rounds';
+public $CompetitionId;
+public $Number;
 }
 class Player extends DatabaseObject
-{
-    private $GameId ;
-private $BotId ;
-private $Score ;
-    private $Votes;
+{  protected static  $table = 'players';
+    public $GameId ;
+public $BotId ;
+public $Score ;
+    public $Votes;
 }
 class Visitor extends DatabaseObject
 {
-    private $BotId;
-    private $VisitorIdentifier;
+    protected static  $table = 'visitors';
+    public $BotId;
+    public $VisitorIdentifier;
 }
 class User extends DatabaseObject {
-    private $Username;
-    private $Password;
-    private $Email;
-    private $FirstName;
-    private $LastName;
-    private $Role;
-
+    protected static  $table = 'users';
+    public $Username;
+    public $Password;
+    public $Email;
+    public $FirstName;
+    public $LastName;
+    public $Role;
+    public $Salt;
+    public $Activity;
     // Bot part
-    private $BotName;
-    private $BotDescription;
-    private $BotScore;
-    private $BotActive;
+    public $BotName;
+    public $BotDescription;
+    public $BotScore;
+    public $BotActive;
 }
 
 

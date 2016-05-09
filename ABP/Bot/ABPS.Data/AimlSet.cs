@@ -10,10 +10,7 @@ namespace ABPS.Data
 
         public long? BotId { get; set; }
         public virtual User Bot { get; set; }
-
         public string AimlFile { get; set; }
-
-        public bool Load { get; set; }
 
 
 
