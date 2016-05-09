@@ -21,42 +21,15 @@
     <favorites_list name="chatbot" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="CBSDCompetitionManagement.obj.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/classes/CBSDCompetitionManagement.obj.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
-              <folding>
-                <element signature="n#createCompetition#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-                <element signature="n#joinCompetition#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-                <element signature="n#getCompetition#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-                <element signature="n#getAllCompetitions#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-                <element signature="n#removeCompetition#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-                <element signature="n#getAllRounds#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-                <element signature="n#getAllGames#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-                <element signature="n#getAllPlayers#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-                <element signature="n#getAllRankings#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-                <element signature="n#voteForPlayer#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-                <element signature="n#getGame#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-                <element signature="n#getPlayer#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-                <marker date="1462781106746" expanded="true" signature="640:641" placeholder="SELECT * FRO... competitions" />
-                <marker date="1462781106746" expanded="true" signature="942:983" placeholder="SELECT Id, C... rounds" />
-                <marker date="1462781106746" expanded="true" signature="1097:1133" placeholder="SELECT `Id`,... games" />
-                <marker date="1462781106746" expanded="true" signature="1246:1281" placeholder="SELECT Id, G... players" />
-                <marker date="1462781106746" expanded="true" signature="1400:1443" placeholder="SELECT Id, C... rankings" />
-                <marker date="1462781106746" expanded="true" signature="1587:1656" placeholder="UPDATE `play... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/classes/su.inc.php" />
+        <option value="$PROJECT_DIR$/classes/CBSD.obj.php" />
         <option value="$PROJECT_DIR$/classes/CBSDCompetitionManagement.obj.php" />
+        <option value="$PROJECT_DIR$/tournament.php" />
       </list>
     </option>
   </component>
@@ -138,6 +111,32 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+  </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
@@ -148,18 +147,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1462780072865</updated>
-      <workItem from="1462780074478" duration="1029000" />
+      <workItem from="1462780074478" duration="9635000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1029000" />
+    <option name="totallyTimeSpent" value="9635000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -188,30 +187,78 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/tournament.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="746">
+          <caret line="83" column="96" selection-start-line="83" selection-start-column="96" selection-end-line="83" selection-end-column="96" />
+          <folding>
+            <element signature="n#getRankName#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1462800342176" expanded="true" signature="1658:1671" placeholder="..." />
+            <marker date="1462800342176" expanded="true" signature="1752:1788" placeholder="..." />
+            <marker date="1462800342176" expanded="true" signature="3972:3985" placeholder="..." />
+            <marker date="1462800342176" expanded="true" signature="4066:4077" placeholder="..." />
+            <marker date="1462800342176" expanded="true" signature="5763:5844" placeholder="..." />
+            <marker date="1462800342176" expanded="true" signature="5908:5947" placeholder="..." />
+            <marker date="1462800342176" expanded="true" signature="6061:6142" placeholder="..." />
+            <marker date="1462800342176" expanded="true" signature="6178:6214" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/classes/CBSDCompetitionManagement.obj.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+        <state relative-caret-position="393">
+          <caret line="110" column="25" selection-start-line="110" selection-start-column="25" selection-end-line="110" selection-end-column="25" />
           <folding>
             <element signature="n#createCompetition#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
             <element signature="n#joinCompetition#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
             <element signature="n#getCompetition#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
             <element signature="n#getAllCompetitions#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
             <element signature="n#removeCompetition#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-            <element signature="n#getAllRounds#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
             <element signature="n#getAllGames#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
             <element signature="n#getAllPlayers#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
             <element signature="n#getAllRankings#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
             <element signature="n#voteForPlayer#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
             <element signature="n#getGame#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
             <element signature="n#getPlayer#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
-            <marker date="1462781106746" expanded="true" signature="640:641" placeholder="SELECT * FRO... competitions" />
-            <marker date="1462781106746" expanded="true" signature="942:983" placeholder="SELECT Id, C... rounds" />
-            <marker date="1462781106746" expanded="true" signature="1097:1133" placeholder="SELECT `Id`,... games" />
-            <marker date="1462781106746" expanded="true" signature="1246:1281" placeholder="SELECT Id, G... players" />
-            <marker date="1462781106746" expanded="true" signature="1400:1443" placeholder="SELECT Id, C... rankings" />
-            <marker date="1462781106746" expanded="true" signature="1587:1656" placeholder="UPDATE `play... " />
+            <element signature="n#getBot#0;n#CBSDCompetitionManagement#0;n#!!top" expanded="false" />
+            <marker date="1462789000029" expanded="true" signature="640:641" placeholder="SELECT * FRO... competitions" />
+            <marker date="1462789000029" expanded="true" signature="941:982" placeholder="SELECT * FRO... table" />
+            <marker date="1462789000029" expanded="true" signature="1106:1155" placeholder="SELECT * FRO... participations" />
+            <marker date="1462789000029" expanded="true" signature="1275:1311" placeholder="SELECT `Id`,... games" />
+            <marker date="1462789000029" expanded="true" signature="1424:1459" placeholder="SELECT Id, G... players" />
+            <marker date="1462789000029" expanded="true" signature="1578:1621" placeholder="SELECT Id, C... rankings" />
+            <marker date="1462789000029" expanded="true" signature="1765:1834" placeholder="UPDATE `play... " />
+            <marker date="1462789000029" expanded="true" signature="2405:2448" placeholder="SELECT * FRO... rankings" />
+            <marker date="1462789000029" expanded="true" signature="2405:2467" placeholder="SELECT * FRO... rankings" />
+            <marker date="1462789000029" expanded="true" signature="2405:2468" placeholder="SELECT * FRO... rankings" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/CBSD.obj.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-379">
+          <caret line="112" column="12" selection-start-line="112" selection-start-column="7" selection-end-line="112" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/su.inc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_chat.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="345" column="1" selection-start-line="345" selection-start-column="1" selection-end-line="347" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>

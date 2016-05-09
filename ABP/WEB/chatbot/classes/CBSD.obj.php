@@ -3,7 +3,7 @@ require_once(dirname(__FILE__)."/JsonSerializer/JsonSerializer.php");
 require_once(dirname(__FILE__)."/Enum.obj.php");
 require_once(dirname(__FILE__)."/SimpleOrm.class.php");
 
-/*
+
 class UserRole extends Enum
 {
     const __default = self::User;
@@ -24,7 +24,7 @@ const Playing=1;
 const Voting=2;
 const Completed=3;
 }
-*/
+
 
 class DataMappingManager
 {
@@ -62,15 +62,8 @@ abstract class SerializableModel extends SimpleOrm {
 
 // Database classes
 class DatabaseObject extends SerializableModel{
-    protected $Id;
-    public function getId()
-    {
-        return $this->Id;
-    }
-    public function setId($Id)
-    {
-        $this->Id = $Id;
-    }
+    public $Id;
+ 
 
 }
 class AimlSet extends DatabaseObject

@@ -39,14 +39,23 @@
 			$compet = Competition::retrieveByPK($id);
 			$compet->delete();
 		}
-		
+
 		// Rounds Management
 		public function getAllRounds($cid)
 		{
+
 			$sql = "SELECT * FROM rounds WHERE CompetitionId=".$cid;
 
 			$rounds = Round::sql($sql);
 			return $rounds;
+		}
+		public function getAllParticipations($cid)
+		{
+
+			$sql = "SELECT * FROM participations WHERE CompetitionId=".$cid;
+
+			$parts = Participation::sql($sql);
+			return $parts;
 		}
 		public function getAllGames($rid)
 		{
@@ -90,6 +99,16 @@
 		{
 			$player = Player::retrieveByPK($pid);
 			return $player;
+		}
+		public function getBot($id)
+		{
+			return User::retrieveByPK($id);
+		}
+		public function getRanking($cid, $bid)
+		{
+			$sql = "SELECT * FROM rankings WHERE CompetitionId=".$cid." AND BotId=".$bid;
+			$ranks = Ranking::sql($sql);
+			return $ranks;
 		}
 
 	}
