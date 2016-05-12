@@ -14,10 +14,10 @@
         </div>
 
         <nav class="collapse navbar-collapse main-navbar" role="navigation">
-            <!--<div class="sidebar-widget widget_search pull-right">
-                <form>
+         <div class="sidebar-widget widget_search pull-right">
+                <form action="bots.php" method="post">
                     <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Search here....">
+                        <input class="form-control"  name="search" id="search" type="text" placeholder="Search here....">
                         <span class="input-group-btn">
                     <button class="btn" type="submit">
                         <i class="fa fa-search"></i>
@@ -26,7 +26,7 @@
 
                     </div>
                 </form>
-            </div>-->
+            </div>
 
             <ul class="nav navbar-nav navbar-right">
                 <li >

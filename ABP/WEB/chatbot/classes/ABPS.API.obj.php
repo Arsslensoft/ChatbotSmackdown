@@ -89,6 +89,8 @@ class SDLBotPlatformServiceAPI
     {
         $this->api_url = $api_url;
         $this->api_key = $api_key;
+
+    
     }
 
         private function makeUrl($query)
@@ -166,8 +168,6 @@ class SDLBotPlatformServiceAPI
     public function getGameHistory($gid)
     {
        return $this->makeRequestJson("method=spectate&gid=".$gid);
-
-
     }
   public function talkWithBot($id, $user, $message)
     {
@@ -176,10 +176,24 @@ class SDLBotPlatformServiceAPI
             return $resp;
         else return null;
     }
+    public function synchronize()
+    {
+        $resp = $this->makeRequest("method=sync");
+
+        if($resp instanceof GoodResponse)
+            return true;
+        else return false;
+    }
+    public function isAvailable()
+    {
+        $resp = $this->makeRequest("method=ping");
+
+        if($resp instanceof GoodResponse)
+            return true;
+        else return false;
+    }
 }
-/*
-$bpsa = new SDLBotPlatformServiceAPI("http://localhost:880/","A");
-$r = $bpsa->getBotStatus(1);*/
+
 
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__)."/JsonSerializer/JsonSerializer.php");
 require_once(dirname(__FILE__)."/Enum.obj.php");
-require_once(dirname(__FILE__)."/SimpleOrm.class.php");
+require_once(dirname(__FILE__)."/ObjectRelationalModel.class.php");
 
 
 class UserRole extends Enum
@@ -39,7 +39,7 @@ class DataMappingManager
     }
     $connection = $conn;
 
-SimpleOrm::useConnection($conn, $GLOBALS["mysql_database"]);
+ObjectRelationalModel::useConnection($conn, $GLOBALS["mysql_database"]);
 
     }
 }
@@ -63,7 +63,7 @@ abstract class SerializableModel   {
 }
 
 // Database classes
-class DatabaseObject extends SimpleOrm{
+class DatabaseObject extends ObjectRelationalModel{
     public $Id;
 
 

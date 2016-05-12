@@ -11,6 +11,13 @@ if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["first
 {
 $CBSDUM->updateUser($CBSDUM->current_userid,$_POST["username"],$_POST["email"],$_POST["firstname"], $_POST["lastname"],$_POST["botname"], $_POST["botdesc"],$_POST["password"] );
     $update_message= "Your profile was successfully updated";
+    $bpsa = new SDLBotPlatformServiceAPI("http://localhost:880/","A");
+    if(!$bpsa->isAvailable())
+    {
+        header("Location: error.php?error=Platform offline&message=The Arsslensoft Bot platform seems to be offline");
+        exit;
+    }
+    $bpsa->synchronize();
 }
 
 if(isset($_GET["id"]))
@@ -32,6 +39,11 @@ function getRoleString($role)
     else return "Administrator";
 }
 $bpsa = new SDLBotPlatformServiceAPI("http://localhost:880/","A");
+if(!$bpsa->isAvailable())
+{
+    header("Location: error.php?error=Platform offline&message=The Arsslensoft Bot platform seems to be offline");
+    exit;
+}
     $bot_available = 0;
     if(!isset( $_SESSION['CBSDUserManagement']))
         $_SESSION['CBSDUserManagement']['user'] = "Unknown";
@@ -95,6 +107,15 @@ if(isset($_POST["botstate"]))
 
 if(isset($_POST["reset"])) {
     $bpsa->reloadBot($uid);
+}
+$ccm = new CBSDCompetitionManagement;
+
+$competitions = $ccm->getAllCompetitions();
+function parseStatut($statut) {
+    if($statut == 0) {return "Ready";}
+    if($statut == 1) {return "Started " ;}
+    if($statut == 2) {return "Completed"; }
+
 }
 
 ?>
@@ -172,7 +193,7 @@ else echo "                                <div style=\" border: 1px solid #5a5a
 
                         <?php
                         if($uid == $CBSDUM->current_userid)
-                                echo "<form method='post' action='profile.php?id=".$CBSDUM->current_userid."''><input name=\"reset\" id=\"reset\" value=\"OK\"  type=\"hidden\"> <input class=\"btn btn-danger col-lg-2 col-sm-2\" type=\"submit\" value=\"reset\" /> </form>";
+                                echo "<form method='post' action='profile.php?id=".$CBSDUM->current_userid."''><input name=\"reset\" id=\"reset\" value=\"OK\"  type=\"hidden\"> <input class=\"btn btn-danger col-lg-2 col-sm-2\" type=\"submit\" value=\"Reset\" /> </form>";
                         ?>
 
 
@@ -197,6 +218,12 @@ else echo "                                <div style=\" border: 1px solid #5a5a
                                     echo "   <li > <a data-toggle=\"tab\" href=\"#improve-bot\">Improve Chat Bot    </a>            </li><li ><a data-toggle=\"tab\" href=\"#edit-profile\">Edit Profile</a>   </li>" ;
 
                                 ?>
+                                <li >
+                                    <a data-toggle="tab" href="#games">
+
+                                        Participations
+                                    </a>
+                                </li>
                             </ul>
                         </header>
                         <div class="well swatch-black-beige">
@@ -314,6 +341,74 @@ else echo "                                <div style=\" border: 1px solid #5a5a
                                     </div>
 
                                 </div>
+                                <!-- games -->
+                                <div id="games" class="tab-pane">
+
+                                    <div class="panel-body bio-graph-info">
+
+                                        <h1> Chat with me</h1>
+
+                                    </div>
+
+                                    <div class="row-fluid">
+                                        <div class="span12">
+
+                                            <table class="table table-hover ">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Competition name</th>
+                                                    <th>start Date</th>
+                                                    <th>statut</th>
+                                                    <th>winner Bot name</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+
+
+
+                                                <?php foreach ($competitions as $Competition) {
+                                                    $parti = $ccm->getAllParticipations($Competition->Id);
+                                                    foreach ($parti as $part ) {
+                                                        if($part->BotId == $uid){
+
+                                                            ?>
+                                                            <tr>
+                                                                <td><?php echo $Competition->Id ?></td>
+                                                                <td><?php echo $Competition->Name ?></td>
+                                                                <td><?php echo $Competition->Start ?></td>
+                                                                <td><?php echo parseStatut($Competition->Status) ?></td>
+                                                                <td> <?php $rankingc = $ccm->getAllRankings($Competition->Id) ;
+                                                                    foreach($rankingc as $rank){
+                                                                        if($rank->Rank == 1 ){
+                                                                            $botn = $ccm->getBot($rank->BotId)  ;
+                                                                            echo $botn->BotName ;}
+                                                                    }
+
+                                                                    ?> </td>
+                                                                <td>
+                                                                    <div class="col-lg-12 col-sm-12">
+                                                                        <?php $tmp = $Competition->Id  ?>
+                                                                        <form action="onecompetition.php?id=<?php echo $tmp ?>" method="post" > <input  class="btn btn-success col-lg-8 " type="submit" value=" visit competition page" />
+
+
+                                                                        </form>
+
+                                                                    </div>
+
+                                                                </td></tr>
+                                                        <?php  }} }    ?>
+
+
+
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div></div>
                                 <!-- chat-with -Bot -->
                                 <div id="chat-bot" class="tab-pane">
 
@@ -377,6 +472,7 @@ else echo "                                <div style=\" border: 1px solid #5a5a
 
 
                                             </div>
+
                                         </form>
                                 </div>
                                 </div>

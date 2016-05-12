@@ -150,11 +150,12 @@ function getRankName($rank)
     else
     {
     ?>
-    <div class="demo ">
-        <div class="jQBracket lr " style="height: 168px; width: 320px;">
+
+    <div class="demo" style="transform: scale(1.7)">
+        <div class="jQBracket lr " style="height: 168px; width: 320px;margin: auto; padding: 10px">
 
 
-            <div class="bracket " style="height: 500px;">
+            <div class="bracket " style="height: 300px;">
 
                 <?php
                 $teamid = 0;
@@ -183,7 +184,7 @@ function getRankName($rank)
 
                                     echo " <div class=\"team\" data-resultid=\"team-$teamid\" data-teamid=\"$teamid\">";
                                     $bot = $ccm->getBot($player->BotId);
-                                    echo "    <div class=\"label editable\" >" . $bot->BotName . "</div>";
+                                    echo "    <div class=\"label editable\" style=\"color:#34383b\">" . $bot->BotName . "</div>";
                                     echo "<div class=\"score editable\" data-resultid=\"result-0\">" . $player->Score . "</div>";
                                     echo "  </div>";
                                 } else {
@@ -191,7 +192,7 @@ function getRankName($rank)
                                         echo " <div class=\"team win highlightWinner\" data-resultid=\"team-$teamid\" data-teamid=\"$teamid\">";
                                     else echo "   <div class=\"team lose highlightLooser\" data-resultid=\"team-$teamid\" data-teamid=\"$teamid\">";
                                     $bot = $ccm->getBot($player->BotId);
-                                    echo "    <div class=\"label editable\">" . $bot->BotName . "</div>";
+                                    echo "    <div class=\"label editable\" style=\"color:#34383b\">" . $bot->BotName . "</div>";
                                     echo "<div class=\"score editable\" data-resultid=\"result-0\">" . $player->Score . "</div>";
                                     echo "   <div class=\"bubble\">" . getRankName($rank[0]->Rank) . "</div>";
                                     echo "  </div>";
@@ -219,7 +220,7 @@ function getRankName($rank)
                                 if ($game->Status != GameStatus::Completed) {
                                     echo " <div class=\"team\" data-resultid=\"team-$teamid\" data-teamid=\"$teamid\">";
                                     $bot = $ccm->getBot($player->BotId);
-                                    echo "    <div class=\"label editable\">" . $bot->BotName . "</div>";
+                                    echo "    <div class=\"label editable\" style=\"color:#34383b\">" . $bot->BotName . "</div>";
                                     echo "<div class=\"score editable\" data-resultid=\"result-0\">" . $player->Score . "</div>";
                                     echo "  </div>";
                                 } else {
@@ -228,7 +229,7 @@ function getRankName($rank)
                                     else echo "   <div class=\"team lose\" data-resultid=\"team-$teamid\" data-teamid=\"$teamid\">";
 
                                     $bot = $ccm->getBot($player->BotId);
-                                    echo "    <div class=\"label editable\">" . $bot->BotName . "</div>";
+                                    echo "    <div class=\"label editable\" style=\"color:#34383b\">" . $bot->BotName . "</div>";
                                     echo "<div class=\"score editable\" data-resultid=\"result-0\">" . $player->Score . "</div>";
                                     echo "  </div>";
                                 }
@@ -245,14 +246,14 @@ function getRankName($rank)
 
                 }
                 }
-                        ?>
+                ?>
 
 
 
-                    </div>
+            </div>
 
-                    </div>
-                </div>
+        </div>
+    </div>
 
 
             </div></div>

@@ -21,7 +21,6 @@ namespace ABPS.Data
        public Game()
        {
            Players = new List<Player>();
- 
        }
   
         public long? RoundId { get; set; }

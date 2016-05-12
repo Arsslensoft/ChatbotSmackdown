@@ -65,6 +65,10 @@
 			}
 			return null;
 		}
+		public function searchBot($sbotname)
+		{
+			return User::sql("SELECT * FROM users WHERE BotName LIKE \"%$sbotname%\"");
+		}
 		public function logoutUser()
 		{
 			if( isset($_SESSION[$this->sessionName]) )

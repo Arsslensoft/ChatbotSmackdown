@@ -38,13 +38,13 @@ function sendMessage(id,botname,username)
 
     $("#chatholder").scrollTop($("#chatholder")[0].scrollHeight);
 
-    $.get("test_chat.php",
+    $.get("chat.php",
         {
             id: id,
     message: encodeMessage(message)
 },  function(data){
     var rnow = moment().format('DD/MM/YYYY HH:mm:ss');
-    var el = " <div class=\"answer right\"><div class=\"avatar\"><img src=\"images/chat/avatar1.png\" alt=\""+botname+"\"> <div class=\"status online\"></div> </div><div class=\"name\">"+botname+"</div> <div class=\"text\"> "+decodeMessage(data)+"</div>   <time class=\"time\" datetime=\""+rnow +"\">now</time> </div>";
+    var el = " <div class=\"answer right\"><div class=\"avatar\"><img src=\"data/avatars/"+id+".jpg\" alt=\""+botname+"\"> <div class=\"status online\"></div> </div><div class=\"name\">"+botname+"</div> <div class=\"text\"> "+decodeMessage(data)+"</div>   <time class=\"time\" datetime=\""+rnow +"\">now</time> </div>";
     $(el).insertBefore("#sendbox");
 
     $("#chatholder").scrollTop($("#chatholder")[0].scrollHeight);

@@ -15,6 +15,11 @@ if(isset($_POST["email"])) {
     $password = $_POST['password'];
     $userid=$CBSDUM->createUser($username, $email, $firstname, $lastname, $botname, $password);
     $bpsa = new SDLBotPlatformServiceAPI("http://localhost:880/","A");
+    if(!$bpsa->isAvailable())
+    {
+        header("Location: error.php?error=Platform offline&message=The Arsslensoft Bot platform seems to be offline");
+        exit;
+    }
     $resp = $bpsa->addBot($userid);
 
 

@@ -25,8 +25,34 @@ namespace ABPS
       {
           get { return Path.Combine(BotPath, "aiml"); }
       }
-   
 
+      public static void Copy(string sourceDirectory, string targetDirectory)
+      {
+          DirectoryInfo diSource = new DirectoryInfo(sourceDirectory);
+          DirectoryInfo diTarget = new DirectoryInfo(targetDirectory);
+
+          CopyAll(diSource, diTarget);
+      }
+
+      public static void CopyAll(DirectoryInfo source, DirectoryInfo target)
+      {
+          Directory.CreateDirectory(target.FullName);
+
+          // Copy each file into the new directory.
+          foreach (FileInfo fi in source.GetFiles())
+          {
+              Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
+              fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+          }
+
+          // Copy each subdirectory using recursion.
+          foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+          {
+              DirectoryInfo nextTargetSubDir =
+                  target.CreateSubdirectory(diSourceSubDir.Name);
+              CopyAll(diSourceSubDir, nextTargetSubDir);
+          }
+      }
 
       public ABPS.Aiml.User BotUser { get; set; }
       public ABPS.Aiml.Bot BotEngine { get; set; }
@@ -40,7 +66,7 @@ namespace ABPS
           Visitors = new List<ABPS.Aiml.User>();
    
           if (!Directory.Exists(BotPath))
-              Directory.CreateDirectory(BotPath);
+             Copy(Path.Combine(Environment.CurrentDirectory, "bots","default"),BotPath);
 
       }
       private void ReloadPersonality()
@@ -55,16 +81,15 @@ namespace ABPS
       private void ReloadAimlSets()
       {
           Platform.LogEvent("Loading aiml " + User.BotName, ConsoleColor.Gray);
-          /*List<AimlSet> aimls = Platform.DBManager.AimlSets.Where(x => x.BotId == User.Id).ToList();
+          List<AimlSet> aimls = Platform.DBManager.AimlSets.Where(x => x.BotId == User.Id).ToList();
           foreach (AimlSet ai in aimls)
           {
-              if (ai.Load)
-              {
+          
                   XmlDocument doc = new XmlDocument();
                   doc.Load(Path.Combine(AIMLPath, ai.AimlFile));
                   BotEngine.loadAIMLFromXML(doc, Path.Combine(AIMLPath, ai.AimlFile));
-              }
-          }*/
+              
+          }
         //if(User.Id == 1)
         //  BotEngine.loadAIMLFromFiles();
       }

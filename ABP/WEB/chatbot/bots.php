@@ -2,6 +2,13 @@
 include "header.php";
 $aul = $CBSDUM->getUsers();
 
+if( isset($_POST["search"])) {
+    $query = $_POST["search"];
+    $aul = $CBSDUM->searchBot($query);
+    if ((empty($sum))) {
+        $error= "Aucun Bot de ce nom";
+    }
+}
 ?>
 
 

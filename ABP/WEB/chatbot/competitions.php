@@ -2,24 +2,30 @@
 
 include "header.php";
 $ccm = new CBSDCompetitionManagement;
-$canjoin = false;
-if($CBSDUM->logged_in )
+$canjoin = true;
+if($CBSDUM->logged_in && isset($_POST["join"]))
 {
-    $cuuser = $CBSDUM->getUser($CBSDUM->current_userid);
     $cid = intval($_POST["join"]);
-    $parts = $ccm->getParticipations($cid, $cuuser->Id);
+    $parts = $ccm->getParticipations($cid, $CBSDUM->current_userid);
     if(count($parts) == 0)
-        $canjoin=true;
-    
-
-if(isset($_POST["join"]))
+        $ccm->joinCompetition($cid, $CBSDUM->current_userid);
+    else $error = "Already joined";
+}
+else if(isset($_POST["join"]))
 {
+    header("Location: login.php");
+    exit;
+}
 
-}
-}
 
 if(isset($_POST["ppw"]))
 {
+    $bpsa = new SDLBotPlatformServiceAPI("http://localhost:880/","A");
+    if(!$bpsa->isAvailable())
+    {
+        header("Location: error.php?error=Platform offline&message=The Arsslensoft Bot platform seems to be offline");
+        exit;
+    }
     $name = $_POST["name"];
     $pn = intval($_POST["pn"]);
     $ppw = intval($_POST["ppw"]);
@@ -27,15 +33,15 @@ if(isset($_POST["ppw"]))
     $desc = $_POST["desc"];
     $start = $_POST["start"];
     $ccm->createCompetition($start, $name,$desc,$ppw,$prize,$pn);
-
+    $bpsa->synchronize();
 }
 
 $competitions = $ccm->getAllCompetitions();
 
 function parseStatut($statut) {
-   if($statut == 0) {return "ready";}
-    if($statut == 1) {return "started " ;}
-    if($statut == 2) {return "completed"; }
+   if($statut == 0) {return "Ready";}
+    if($statut == 1) {return "Started " ;}
+    if($statut == 2) {return "Completed"; }
 
 }
 
@@ -74,6 +80,11 @@ function parseStatut($statut) {
 
             <header class="section-header ">
                 <h1 class="headline super hairline">Competitions</h1>
+                <?php if( isset($error) ): ?>
+                    <p style="color: red">
+                        <?php echo $error; ?>
+                    </p>
+                <?php endif; ?>
             </header>
             <div class="row-fluid">
 
@@ -139,17 +150,25 @@ foreach ($competitions as $Competition) {
 
                                 ?> </td>
                             <td><div class="col-lg-12 col-sm-12">
-                                    <?php $tmp = $Competition->Id  ?>
+                                    <?php $tmp = $Competition->Id ; ?>
                                     <form action="onecompetition.php?id=<?php echo $tmp ?>" method="post" > <input  class="btn btn-success col-lg-8 " type="submit" value=" visit competition page" />
 
 
                                     </form>
+                                    <?php
+                                    if($Competition->Status == CompetitionStatus::Ready){
+                                    ?>
                                     <div>
-                                        <form action ="join.php">
+
+                                        <form action ="competitions.php" method="post">
+                                            <input name="join" id="join" value="<?php echo $Competition->Id; ?>" type="hidden" >
                                             <input class="btn btn-danger col-lg-3 " type="submit" value="Join" />
 
 
-                                        </form></div>
+                                        </form>
+                                    </div>
+
+                                    <?php  } ?>
                                 </div>
 
                             </td>

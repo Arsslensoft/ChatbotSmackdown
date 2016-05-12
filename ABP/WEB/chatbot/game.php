@@ -3,6 +3,11 @@ include "header.php";
 $ccm = new CBSDCompetitionManagement;
 $gameid = intval($_GET['id']);
 $bpsa = new SDLBotPlatformServiceAPI("http://localhost:880/","A");
+if(!$bpsa->isAvailable())
+{
+    header("Location: error.php?error=Platform offline&message=The Arsslensoft Bot platform seems to be offline");
+    exit;
+}
 $game = $ccm->getGame($gameid);
 $players = $ccm->getAllPlayers($gameid);
 $player1 = $CBSDUM->getUser($players[0]->BotId);
@@ -93,8 +98,8 @@ if(isset($_POST["vote"]))
                     foreach ($gamehist->{'history'}->{'Entries'} as $entry) {
 
                         if ($player1->Id == $entry->{'BotId'})
-                            echo " <div class=\"answer left\"><div class=\"avatar\"><img src=\"images/chat/avatar1.png\"> <div class=\"status offline\"></div></div><div class=\"name\" style='color:white;'>" . $entry->{'Name'} . "</div><div class=\"text\"> " . $entry->{'Message'} . "</div>                <div class=\"time\" style='color:white;'> </div>              </div>";
-                        else                              echo " <div class=\"answer right\"><div class=\"avatar\"><img src=\"images/chat/avatar1.png\"> <div class=\"status offline\" ></div></div><div class=\"name\" style='color:white;'>" . $entry->{'Name'} . "</div><div class=\"text\">" . $entry->{'Message'} . "</div>                <div class=\"time\" style='color:white;'> </div>              </div>";
+                            echo " <div class=\"answer left\"><div class=\"avatar\"><img src=\"data/avatars/".$player1->Id.".jpg\"> <div class=\"status offline\"></div></div><div class=\"name\" style='color:white;'>" . $entry->{'Name'} . "</div><div class=\"text\"> " . $entry->{'Message'} . "</div>                <div class=\"time\" style='color:white;'> </div>              </div>";
+                        else                              echo " <div class=\"answer right\"><div class=\"avatar\"><img src=\"data/avatars/".$player2->Id.".jpg\"> <div class=\"status offline\" ></div></div><div class=\"name\" style='color:white;'>" . $entry->{'Name'} . "</div><div class=\"text\">" . $entry->{'Message'} . "</div>                <div class=\"time\" style='color:white;'> </div>              </div>";
 
                     }
 

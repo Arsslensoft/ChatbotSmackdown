@@ -21,6 +21,7 @@
 			$part = new Participation();
 			$part->CompetitionId = $cid;
 			$part->BotId = $bid;
+			$part->JoinDate = date("Y-m-d H:i:s",time());
 			$part->save();
 
 		}
