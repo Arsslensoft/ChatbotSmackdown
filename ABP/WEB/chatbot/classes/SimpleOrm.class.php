@@ -1,6 +1,6 @@
 <?php
 
-abstract class SimpleOrm
+abstract class SimpleOrm extends SerializableModel
 {
     protected static
         $conn,

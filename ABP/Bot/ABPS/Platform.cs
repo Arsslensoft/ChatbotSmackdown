@@ -41,7 +41,7 @@ namespace ABPS
            Chatbot chat = new Chatbot(bot);
            Chatbots.Add(chat);
 
-           chat.ReloadBot();
+           chat.ReloadBot(bot);
        }
        public static void ReloadBots()
        {
@@ -56,7 +56,6 @@ namespace ABPS
            DBManager = new ChatbotSmackdownDb();
                   UpdateTimer = new System.Timers.Timer(update_timeout);
                   Api = new PlatformAPI();
-       
             UpdateTimer.Elapsed += OnTimedEvent;
             UpdateTimer.AutoReset = true;
             UpdateTimer.Enabled = true;

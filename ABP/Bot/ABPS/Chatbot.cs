@@ -65,12 +65,12 @@ namespace ABPS
                   BotEngine.loadAIMLFromXML(doc, Path.Combine(AIMLPath, ai.AimlFile));
               }
           }*/
-        if(User.Id == 1)
-          BotEngine.loadAIMLFromFiles();
+        //if(User.Id == 1)
+        //  BotEngine.loadAIMLFromFiles();
       }
-      public void ReloadBot()
+      public void ReloadBot(ABPS.Data.User u)
       {
-
+          User = u;
          Platform.LogEvent("Loading bot " + User.BotName, ConsoleColor.Magenta );
           BotEngine = new Bot(BotPath);
           BotEngine.isAcceptingUserInput = false;

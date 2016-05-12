@@ -12,6 +12,7 @@
 			$compet->PointsPerWin = $ppw;
 			$compet->ParticipantNumber = $pn;
 			$compet->Prize = $prize;
+			$compet->Status= CompetitionStatus::Ready;
 			$compet->save();
 		}
 		public function joinCompetition($cid, $bid)
@@ -57,6 +58,14 @@
 			$parts = Participation::sql($sql);
 			return $parts;
 		}
+		public function getParticipations($cid,$bid)
+		{
+
+			$sql = "SELECT * FROM participations WHERE CompetitionId=".$cid." AND BotId=".$bid;
+
+			$parts = Participation::sql($sql);
+			return $parts;
+		}
 		public function getAllGames($rid)
 		{
 			$sql = "SELECT * FROM `games` WHERE RoundId=".$rid;
@@ -78,17 +87,12 @@
 		}
 
 		// Game Management
-		public function voteForPlayer($gid, $bid)
+		public function voteForPlayer($pid)
 		{
 
-			$sql = "UPDATE `players` SET `Votes`=`Votes` + 1 WHERE GameId=? AND BotId = ?";
-			if( !$this->stmt = $this->mysqli->prepare($sql) )
-				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
-
-			$this->stmt->bind_param("ii",$gid,$bid);
-			if( $this->stmt->execute() )
-				true;
-			return false;
+			$player = Player::retrieveByPK($pid);
+			$player->Votes++;
+			$player->save();
 		}
 		public function getGame($gid)
 		{

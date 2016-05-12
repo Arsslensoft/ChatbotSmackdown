@@ -17,6 +17,10 @@ namespace ABPS
         public string Name { get; set; }
         public string Message { get; set; }
 
+        public GameHistoryEntry()
+        {
+
+        }
         public GameHistoryEntry(User bot, string msg)
         {
             BotId = bot.Id;

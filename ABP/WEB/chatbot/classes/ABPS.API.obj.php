@@ -111,7 +111,13 @@ class SDLBotPlatformServiceAPI
                 return $this->last_response ;
             }
         }
-
+    public function makeRequestJson($url)
+    {
+        $this->last_response =null;
+        $r = new HttpRequest("get",$this->makeUrl($url));
+        if ($r->getError())return null;
+       else return  $r->getResponse();
+    }
     // API Methods
         public function getBotStatus($id)
         {
@@ -134,9 +140,9 @@ class SDLBotPlatformServiceAPI
             return $resp;
         else return null;
     }
-        public function reloadBot($id)
+    public function reloadBot($id)
     {
-        $resp = $this->makeRequest("method=add&id=".$id);
+        $resp = $this->makeRequest("method=reload&id=".$id);
         if($resp instanceof GoodResponse)
             return $resp;
         else return null;
@@ -150,12 +156,20 @@ class SDLBotPlatformServiceAPI
     }
         public function spectateGame($gid)
     {
-        $resp = $this->makeRequest("method=spectate&id=".$gid);
+        $resp = $this->makeRequest("method=spectate&gid=".$gid);
+
         if($resp instanceof GameHistoryResponse)
             return $resp;
         else return null;
     }
-        public function talkWithBot($id, $user, $message)
+
+    public function getGameHistory($gid)
+    {
+       return $this->makeRequestJson("method=spectate&gid=".$gid);
+
+
+    }
+  public function talkWithBot($id, $user, $message)
     {
         $resp = $this->makeRequest("method=talk&id=".$id."&user=".$user."&message=".$message);
         if($resp instanceof BotAnswerResponse)

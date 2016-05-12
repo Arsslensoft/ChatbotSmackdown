@@ -11,6 +11,6 @@
 	$GLOBALS["mysql_username"] = "root";
 	$GLOBALS["mysql_password"] = "";
 	$GLOBALS["mysql_database"] = "cbsd";
-
+	$GLOBALS["platform_path"] = "../../Release/bots";
 
 ?>

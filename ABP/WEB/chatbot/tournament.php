@@ -133,12 +133,7 @@ function getRankName($rank)
 
 
                 }
-            // get winners
-            if($cpt->Status == CompetitionStatus::Completed)
-            {
-                $rankings = $ccm->getAllRankings($cid);
 
-            }
             ?>
 
 

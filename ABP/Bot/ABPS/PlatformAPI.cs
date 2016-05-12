@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ABPS.Utils;
 namespace ABPS
 {
    public class PlatformAPI
@@ -54,11 +54,15 @@ namespace ABPS
            {
                Platform.LogEvent("Reload bot " + id, ConsoleColor.DarkCyan);
                long bid = long.Parse(id);
+               Platform.DBManager.Dispose();
+               Platform.DBManager = new ChatbotSmackdownDb();
+               Platform.Load();
+         
                List<User> bots = Platform.DBManager.Users.Where(x => x.Id == bid).ToList();
                if (bots.Count > 0)
                {
                    Chatbot cb = Platform.Chatbots.Where(x => x.User.Id == bid).ToList()[0];
-                   cb.ReloadBot();
+                   cb.ReloadBot(bots[0]);
                    return JsonConvert.SerializeObject(new GoodResponse("OK", "The bot has been successfully reloaded"));
                }
                else
@@ -121,7 +125,9 @@ namespace ABPS
             if (bots.Count > 0)
             {
                 if(bots[0].IsInGame)
-                    return JsonConvert.SerializeObject(new ErrorResponse("BOT_IS_BUSY", "This bot is in game"));
+                    return JsonConvert.SerializeObject(new ErrorResponse("BOT_IS_BUSY", Convert.ToBase64String(Encoding.UTF8.GetBytes("This bot is in game"))));
+                else if(  !bots[0].User.BotActive)
+                    return JsonConvert.SerializeObject(new BotAnswerResponse("OK", Convert.ToBase64String(Encoding.UTF8.GetBytes("This bot was disabled by it's owner"))));
 
                 List<Visitor> vis = Platform.DBManager.Visitors.Where(x => x.VisitorIdentifier == user && x.BotId == bid).ToList();
                 if (vis.Count > 0)
@@ -141,16 +147,17 @@ namespace ABPS
                     Platform.DBManager.SaveChanges();
 
                     string answer = bots[0].Answer(message, v);
-                    return JsonConvert.SerializeObject(new BotAnswerResponse("OK", answer));
+                    return JsonConvert.SerializeObject(new BotAnswerResponse("OK", Convert.ToBase64String(Encoding.UTF8.GetBytes(answer))));
                 }
               
             }
             else
-                return JsonConvert.SerializeObject(new ErrorResponse("BOT_NOT_EXIST", "This bot does not exist"));
+                return JsonConvert.SerializeObject(new ErrorResponse("BOT_NOT_EXIST", Convert.ToBase64String(Encoding.UTF8.GetBytes("This bot does not exist"))));
         }
         catch (Exception ex)
         {
-            return JsonConvert.SerializeObject(new ErrorResponse("FAILED", ex.Message));
+            return JsonConvert.SerializeObject(new BotAnswerResponse("OK", Convert.ToBase64String(Encoding.UTF8.GetBytes(ex.Message))));
+
         }
 
        }

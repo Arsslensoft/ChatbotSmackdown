@@ -28,21 +28,23 @@ const Completed=3;
 
 class DataMappingManager
 {
+    public static $connection;
     public static function initializeMapper($conn = null)
     {
     if($conn == null) {
         // Connect to the database using mysqli
         $conn = new mysqli($GLOBALS["mysql_hostname"], $GLOBALS["mysql_username"], $GLOBALS["mysql_password"], $GLOBALS["mysql_database"]);
         if( $conn->connect_error )
-            throw new Exception("MySQL connection could not be established: ".$this->mysqli->connect_error);
+            throw new Exception("MySQL connection could not be established: ".$conn->connect_error);
     }
+    $connection = $conn;
 
 SimpleOrm::useConnection($conn, $GLOBALS["mysql_database"]);
 
     }
 }
 
-abstract class SerializableModel extends SimpleOrm {
+abstract class SerializableModel   {
     public function serialize() {
         $serializer = new JsonSerializer();
         return $serializer->serialize($this);
@@ -61,9 +63,9 @@ abstract class SerializableModel extends SimpleOrm {
 }
 
 // Database classes
-class DatabaseObject extends SerializableModel{
+class DatabaseObject extends SimpleOrm{
     public $Id;
- 
+
 
 }
 class AimlSet extends DatabaseObject
@@ -139,7 +141,6 @@ class User extends DatabaseObject {
     public $LastName;
     public $Role;
     public $Salt;
-    public $Activity;
     // Bot part
     public $BotName;
     public $BotDescription;

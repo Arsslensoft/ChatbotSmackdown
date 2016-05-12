@@ -3,10 +3,10 @@
 	class CBSDUserManagement
 	{
 
-		private $mysqli, $stmt;
+		private $stmt;
 		private $sessionName = "CBSDUserManagement";
 		public $logged_in = false;
-
+		public $current_userid;
 
 		/**
 		* Object construct verifies that a session has been started and that a MySQL connection can be established.
@@ -21,32 +21,49 @@
 			if( strlen($sessionId) == 0)
 				throw new Exception("No session has been started.\n<br />Please add `session_start();` initially in your file before any output.");
 
-			$this->mysqli = new mysqli($GLOBALS["mysql_hostname"], $GLOBALS["mysql_username"], $GLOBALS["mysql_password"], $GLOBALS["mysql_database"]);
-			if( $this->mysqli->connect_error )
-				throw new Exception("MySQL connection could not be established: ".$this->mysqli->connect_error);
+			DataMappingManager::initializeMapper();
 
 			$this->_validateUser();
-			$this->_updateActivity();
+
 		}
 		// User Management
 
-		public function createUser($user)
+		public function createUser($username, $email, $firstname, $lastname,$botname,$password)
 		{
-			$user->Salt  = $this->_generateSalt();
-			$password = $user->Salt.$user->Password;
-			$user->Password = sha1($password);
-			$user->save();
-		}
-		public function loginUser( $username, $password )
-		{
-			$sql = "SELECT * FROM users WHERE Username='$username' AND SHA1(CONCAT(uSalt, '$password'))=Password LIMIT 1";
-			$user = User::sql($sql);
+			$user =new User;
 
-			$_SESSION[$this->sessionName]["Id"] = $user->Id;
-			$_SESSION[$this->sessionName]["user"] = $user->Username;
-			$this->logged_in = true;
+
+			$salt = $this->_generateSalt();
+			$password = $salt.$password;
+			$user->Salt = $salt;
+			$user->Password = sha1($password);
+			$user->Username = $username;
+			$user->Email = $email;
+			$user->FirstName = $firstname;
+			$user->LastName = $lastname;
+			$user->BotName = $botname;
+			$user->Role=0;
+			$user->BotScore=0;
+			$user->BotActive=true;
+
+			$user->save();
 
 			return $user->Id;
+		}
+
+		public function loginUser( $username, $password )
+		{
+			$sql = "SELECT * FROM users WHERE Username='$username' AND SHA1(CONCAT(Salt, '$password'))=Password LIMIT 1";
+			$user = User::sql($sql);
+			if(count($user) == 1) {
+				$_SESSION[$this->sessionName]["Id"] = $user[0]->Id;
+				$_SESSION[$this->sessionName]["user"] = $user[0]->Username;
+				$this->current_userid = intval($_SESSION[$this->sessionName]["Id"]);
+				$this->logged_in = true;
+
+				return $user[0]->Id;
+			}
+			return null;
 		}
 		public function logoutUser()
 		{
@@ -71,34 +88,41 @@
 		{
 			return User::All();
 		}
+		public function getLeaderboard()
+		{
+			$sql = "SELECT * FROM users WHERE ORDER BY BotScore DESC LIMIT 3";
+			return User::sql($sql);
+		}
 		public function getUser( $userId = null )
 		{
 
 			if( $userId == null )
-				$userId = $_SESSION[$this->sessionName]["userId"];
+				$userId = $_SESSION[$this->sessionName]["Id"];
 
 			$user = User::retrieveByPK($userId);
 			return $user;
 
 		}
-		public function updateUser($userId,$username, $email, $firstname, $lastname,$botname,$botdesc,$botactive,$password)
+		public function updateUser($userId,$username, $email, $firstname, $lastname,$botname,$botdesc,$password)
 		{
 			if( $userId == null )
-				$userId = $_SESSION[$this->sessionName]["userId"];
+				$userId = $_SESSION[$this->sessionName]["Id"];
 
 				$user = User::retrieveByPK($userId);
 
 			$salt = $this->_generateSalt();
 			$password = $salt.$password;
 			$user->Salt = $salt;
-			$user->Password = $password;
+			$user->Password = sha1($password);
 			$user->Username = $username;
 			$user->Email = $email;
 			$user->FirstName = $firstname;
 			$user->LastName = $lastname;
 			$user->BotName = $botname;
 			$user->BotDescription = $botdesc;
-			$user->BotActive = $botactive;
+			$user->BotScore = 0;
+			$user->BotActive = true;
+			$user->Role = 0;
 
 			$user->save();
 		}
@@ -131,7 +155,12 @@
 			return false;
 		}
 
-
+		public function setBotState($id, $state)
+		{
+			$user = User::retrieveByPK($id);
+			$user->BotActive = $state;
+			$user->save();
+		}
 		// Bot Settings Management
 		public function addAimlSet($bid, $aimlfile)
 		{
@@ -170,21 +199,7 @@
 
 
 
-		private function _updateActivity()
-		{
-			if( !$this->logged_in )
-				return;
 
-			$userId = $_SESSION[$this->sessionName]["Id"];
-
-			$sql = "UPDATE users SET Activity=NOW() WHERE Id=? LIMIT 1";
-			if( !$this->stmt = $this->mysqli->prepare($sql) )
-				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
-
-			$this->stmt->bind_param("i", $userId);
-			$this->stmt->execute();
-			return;
-		}
 		private function _validateUser()
 		{
 			if( !isset($_SESSION[$this->sessionName]["Id"]) )
@@ -192,22 +207,17 @@
 
 			if( !$this->_validateUserId() )
 				return;
-
+			$this->current_userid = intval($_SESSION[$this->sessionName]["Id"]);
 			$this->logged_in = true;
 		}
 		private function _validateUserId()
 		{
 			$userId = $_SESSION[$this->sessionName]["Id"];
 
-			$sql = "SELECT userId FROM users WHERE Id=? LIMIT 1";
-			if( !$this->stmt = $this->mysqli->prepare($sql) )
-				throw new Exception("MySQL Prepare statement failed: ".$this->mysqli->error);
+			$sql = "SELECT * FROM users WHERE Id=".$userId." LIMIT 1";
+			$users = User::sql($sql);
 
-			$this->stmt->bind_param("i", $userId);
-			$this->stmt->execute();
-			$this->stmt->store_result();
-
-			if( $this->stmt->num_rows == 1)
+			if( count($users))
 				return true;
 
 			$this->logoutUser();

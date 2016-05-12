@@ -20,7 +20,7 @@ namespace ABPS.Data
        public string LastName { get; set; }
        public UserRole Role { get; set; }
        public string Salt { get; set; }
-       public DateTime Activity { get; set; }
+   
        // Bot part
        public string BotName { get; set; }
        public string BotDescription { get; set; }
