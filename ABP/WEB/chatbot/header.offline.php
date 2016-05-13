@@ -51,15 +51,15 @@
                 </li>
 
                 <li>
-                    <a href="bots.php" >ChatBots</a>
+                    <a href="bots.php" >Chatbots</a>
 
                 </li>
                 <li >
-                    <a href="login.php" >Log in</a>
+                    <a href="login.php" >Login</a>
 
                 </li>
                 <li >
-                    <a href="signup.php" >sign up</a>
+                    <a href="signup.php" >Signup</a>
 
                 </li>
                 <li>

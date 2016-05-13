@@ -3,13 +3,17 @@
 include "header.php";
 $ccm = new CBSDCompetitionManagement;
 $canjoin = true;
+
 if($CBSDUM->logged_in && isset($_POST["join"]))
 {
     $cid = intval($_POST["join"]);
+
     $parts = $ccm->getParticipations($cid, $CBSDUM->current_userid);
-    if(count($parts) == 0)
+    $allparts = $ccm->getAllParticipations($cid);
+    $cpt = $ccm->getCompetition($cid);
+    if(count($parts) == 0 && count($allparts) < $cpt->ParticipantNumber)
         $ccm->joinCompetition($cid, $CBSDUM->current_userid);
-    else $error = "Already joined";
+    else $error = "Already joined or full";
 }
 else if(isset($_POST["join"]))
 {
@@ -156,7 +160,7 @@ foreach ($competitions as $Competition) {
                                 ?> </td>
                             <td><div class="col-lg-12 col-sm-12">
                                     <?php $tmp = $Competition->Id ; ?>
-                                    <form action="onecompetition.php?id=<?php echo $tmp ?>" method="post" > <input  class="btn btn-success col-lg-8 " type="submit" value=" visit competition page" />
+                                    <form action="onecompetition.php?id=<?php echo $tmp ?>" method="post" > <input  class="btn btn-success col-lg-8 " type="submit" value="Visit competition" />
 
 
                                     </form>
@@ -166,7 +170,11 @@ foreach ($competitions as $Competition) {
                                     <div>
 
                                         <form action ="competitions.php" method="post">
-                                            <input name="join" id="join" value="<?php echo $Competition->Id; ?>" type="hidden" >
+                                            <?php
+                                                    echo "<input name=\"join\" id=\"join\" value=\"".$Competition->Id."\" type=\"hidden\" >";
+                                            ?>
+
+
                                             <input class="btn btn-danger col-lg-3 " type="submit" value="Join" />
 
 
@@ -293,7 +301,7 @@ foreach ($competitions as $Competition) {
 <script src="assets/js/packages.min.js"></script>
 <script src="assets/js/theme.min.js"></script>
 <script type="text/javascript" src="js/jquery.bracket.min.js"></script>
-<link rel="stylesheet" type="text/css" href="jquery.bracket.min.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/jquery.bracket.min.css" />
 </body>
 </html>
 

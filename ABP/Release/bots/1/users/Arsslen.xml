@@ -42,6 +42,6 @@
   <item name="TOPIC" value="me" />
   <item name="LIKE" value="me" />
   <item name="IT" value="me" />
-  <item name="PERSONALITY" value="polite" />
   <item name="FATHER" value="ahmed" />
+  <item name="PERSONALITY" value="polite" />
 </root>

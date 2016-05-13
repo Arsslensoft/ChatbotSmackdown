@@ -15,7 +15,16 @@ function getRankName($rank)
         return "3rd";
     else return "4th";
 }
-
+function getStatusName($stat)
+{
+    if($stat == 0)
+        return "Pending";
+    else if($stat == 1)
+        return "Playing";
+    else if($stat == 2)
+        return "Voting";
+    else return "Complete";
+}
 if($loggedin)
     include "header.loggedin.php";
 else
@@ -74,10 +83,11 @@ else
                         <tr>
 
                             <th>Game number </th>
-                            <th>start time</th>
-                            <th>player 1 </th>
+                            <th>Start time</th>
+                            <th>Player 1 </th>
                             <th>Player 2</th>
-                            <th>winner</th>
+                            <th>Status</th>
+                            <th>Winner</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -99,7 +109,10 @@ else
                                 $tmp2 = $players[1]->BotId;
                                 $player2 = $ccm->getBot($tmp2);
                                 echo $player2->BotName; ?></td>
+
+                            <td> <?php echo getStatusName($game->Status); ?></td>
                             <td> <?php $btmp = ($ccm ->getBot($game->WinnerId)); echo $btmp->BotName ?></td>
+
                             <td><div class="col-lg-12 col-sm-12">
                                     <form action="game.php" method="get">
                                         <input type="hidden" value="<?php echo $game->Id; ?>"  name="id" id="id" >
@@ -375,6 +388,6 @@ else
 <script src="assets/js/packages.min.js"></script>
 <script src="assets/js/theme.min.js"></script>
 <script type="text/javascript" src="js/jquery.bracket.min.js"></script>
-<link rel="stylesheet" type="text/css" href="jquery.bracket.min.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/jquery.bracket.min.css" />
 </body>
 </html>

@@ -3,12 +3,14 @@ include "header.php";
 $ccm = new CBSDCompetitionManagement;
 $gameid = intval($_GET['id']);
 $bpsa = new SDLBotPlatformServiceAPI("http://localhost:880/","A");
-if(!$bpsa->isAvailable())
-{
-    header("Location: error.php?error=Platform offline&message=The Arsslensoft Bot platform seems to be offline");
-    exit;
-}
 $game = $ccm->getGame($gameid);
+if($game->Status != GameStatus::Pending) {
+    if (!$bpsa->isAvailable()) {
+        header("Location: error.php?error=Platform offline&message=The Arsslensoft Bot platform seems to be offline");
+        exit;
+    }
+}
+
 $players = $ccm->getAllPlayers($gameid);
 $player1 = $CBSDUM->getUser($players[0]->BotId);
 $player2 = $CBSDUM->getUser($players[1]->BotId);
@@ -278,6 +280,6 @@ refreshChatbox(<?php echo $gameid; ?>,<?php echo $player1->Id; ?>,<?php echo $pl
 <script src="assets/js/packages.min.js"></script>
 <script src="assets/js/theme.min.js"></script>
 <script type="text/javascript" src="js/jquery.bracket.min.js"></script>
-<link rel="stylesheet" type="text/css" href="jquery.bracket.min.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/jquery.bracket.min.css" />
 </body>
 </html>

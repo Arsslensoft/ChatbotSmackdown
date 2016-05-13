@@ -24,12 +24,16 @@ namespace ABPS
        public static HttpService Service { get; set; }
        public static System.Timers.Timer UpdateTimer {get;set;}
        public static List<Chatbot> Chatbots { get; set; }
+       public static object sync_lock = new object();
        public static void Synchronize()
        {
            try
            {
-               foreach (var entity in Platform.DBManager.ChangeTracker.Entries())
-                   entity.Reload();
+               lock (sync_lock)
+               {
+                   foreach (var entity in Platform.DBManager.ChangeTracker.Entries())
+                       entity.Reload();
+               }
            }
            catch (Exception ex)
            {
@@ -102,7 +106,7 @@ namespace ABPS
        {
            try
            {
-               Load();
+               Synchronize();
            }
            catch (Exception ex)
            {

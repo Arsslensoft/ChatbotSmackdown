@@ -53,7 +53,7 @@
                 </li>
 
                 <li>
-                    <a href="bots.php" >ChatBots</a>
+                    <a href="bots.php" >Chatbots</a>
 
                 </li>
                 <li>
