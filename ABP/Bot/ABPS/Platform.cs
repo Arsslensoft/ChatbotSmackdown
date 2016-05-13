@@ -14,7 +14,7 @@ namespace ABPS
         public static TimeSpan GameSpacing = new TimeSpan(0, 0, 2);
         public static TimeSpan GameDuration = new TimeSpan(0,0,15);
         public static TimeSpan PlayerPause = new TimeSpan(0, 0, 2);
-        public static TimeSpan RoundInterval = new TimeSpan(0, 0,30);
+        public static TimeSpan RoundInterval = new TimeSpan(0,1,0);
        
     }
    public static class Platform

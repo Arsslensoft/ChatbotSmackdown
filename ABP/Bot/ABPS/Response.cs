@@ -58,7 +58,6 @@ namespace ABPS
        {
            bot = id;
            status = active ? 1 : 0;
-
        }
    }
    public class BotInfoResponse : Response

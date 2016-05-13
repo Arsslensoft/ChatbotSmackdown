@@ -1,7 +1,7 @@
 <?php
 function getPageTitle()
 {
-    $basedir = "/chatbot/";
+    $basedir = "/";
     $filename =$_SERVER["PHP_SELF"];
 
     if(($filename == $basedir."login.php")==1)

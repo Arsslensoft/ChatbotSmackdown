@@ -124,9 +124,6 @@
 			$user->LastName = $lastname;
 			$user->BotName = $botname;
 			$user->BotDescription = $botdesc;
-			$user->BotScore = 0;
-			$user->BotActive = true;
-			$user->Role = 0;
 
 			$user->save();
 		}

@@ -6,9 +6,11 @@ if(!isset($_GET["id"]))
     header("Location: profile.php?id=".$CBSDUM->current_userid);
     exit;
 }
+
 // update user infos
 if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["botname"]) && isset($_POST["botdesc"]))
 {
+
 $CBSDUM->updateUser($CBSDUM->current_userid,$_POST["username"],$_POST["email"],$_POST["firstname"], $_POST["lastname"],$_POST["botname"], $_POST["botdesc"],$_POST["password"] );
     $update_message= "Your profile was successfully updated";
     $bpsa = new SDLBotPlatformServiceAPI("http://localhost:880/","A");
@@ -286,7 +288,7 @@ else echo "                                <div style=\" border: 1px solid #5a5a
                                                 <button type="submit" class="btn btn-primary">Upload</button>
                                             </div>
                                         </form>
-                                        <form class="form-horizontal" role="form" method="post" action="profile.php">
+                                        <form class="form-horizontal" role="form" method="post" action="profile.php?id=<?php echo $uid; ?>">
                                             <div class="form-group">
                                                 <label class="col-lg-2 control-label">First Name</label>
                                                 <div class="col-lg-6">
@@ -454,7 +456,7 @@ else echo "                                <div style=\" border: 1px solid #5a5a
                                                 <label class="col-md-3 control-label">Settings files</label>
                                                 <div >
                                                     <input type="hidden" name="id" id="id" value="<?= $uid;?>" >
-                                                    <input type="file" name="setting" id="settings" >
+                                                    <input type="file" name="setting" id="setting" >
                                                     <input class="btn-default"  type="submit" value="Upload">
                                                 </div>
                                             </div>

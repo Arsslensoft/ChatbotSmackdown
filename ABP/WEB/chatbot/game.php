@@ -28,12 +28,19 @@ else
 <div id="content" role="main">
 
     <script type="text/javascript">
-        <?php if($game->Status == GameStatus::Playing){ ?>
+
         jQuery(document).ready(function() {
+            <?php if($game->Status == GameStatus::Playing){ ?>
             setInterval('refreshChat()', 2500);
+            <?php } ?>
+            setInterval('refreshOnStateChange()', 2000);
         });
 
-        <?php } ?>
+
+        function refreshOnStateChange()
+        {
+            recheckGame(<?php echo $game->Id; ?>,"<?php echo $game->Status; ?>");
+        }
         function refreshChatbox(gameid, firstid, secondid)
         {
             var chatbase="<h6>Chat History</h6><div  id=\"spectatebox\"></div>";
@@ -129,13 +136,18 @@ refreshChatbox(<?php echo $gameid; ?>,<?php echo $player1->Id; ?>,<?php echo $pl
                     <?php
 
                     $gamehist = json_decode($bpsa->getGameHistory($gameid));
-                    foreach ($gamehist->{'history'}->{'Entries'} as $entry) {
-                        if ($player1->Id == $entry->{'BotId'})
-                            echo " <div class=\"answer left\"><div class=\"avatar\"><img src=\"data/avatars/".$player1->Id.".jpg\"> <div class=\"status offline\"></div></div><div class=\"name\" style='color:white;'>" . $entry->{'Name'} . "</div><div class=\"text\"> " . $entry->{'Message'} . "</div>                <div class=\"time\" style='color:white;'> </div>              </div>";
-                        else                              echo " <div class=\"answer right\"><div class=\"avatar\"><img src=\"data/avatars/".$player2->Id.".jpg\"> <div class=\"status offline\" ></div></div><div class=\"name\" style='color:white;'>" . $entry->{'Name'} . "</div><div class=\"text\">" . $entry->{'Message'} . "</div>                <div class=\"time\" style='color:white;'> </div>              </div>";
+                    try {
+                        foreach ($gamehist->{'history'}->{'Entries'} as $entry) {
+                            if ($player1->Id == $entry->{'BotId'})
+                                echo " <div class=\"answer left\"><div class=\"avatar\"><img src=\"data/avatars/" . $player1->Id . ".jpg\"> <div class=\"status offline\"></div></div><div class=\"name\" style='color:white;'>" . $entry->{'Name'} . "</div><div class=\"text\"> " . $entry->{'Message'} . "</div>                <div class=\"time\" style='color:white;'> </div>              </div>";
+                            else                              echo " <div class=\"answer right\"><div class=\"avatar\"><img src=\"data/avatars/" . $player2->Id . ".jpg\"> <div class=\"status offline\" ></div></div><div class=\"name\" style='color:white;'>" . $entry->{'Name'} . "</div><div class=\"text\">" . $entry->{'Message'} . "</div>                <div class=\"time\" style='color:white;'> </div>              </div>";
+
+                        }
+
+
+                    } catch (Exception $e) {
 
                     }
-
                     }
  ?>
 

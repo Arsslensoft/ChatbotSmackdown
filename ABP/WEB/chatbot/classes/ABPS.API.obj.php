@@ -192,6 +192,31 @@ class SDLBotPlatformServiceAPI
             return true;
         else return false;
     }
+    public function reloadCompetitions()
+    {
+        $resp = $this->makeRequest("method=competreload");
+
+        if($resp instanceof GoodResponse)
+            return true;
+        else return false;
+    }
+    public function getCompetitionStatus($id)
+    {
+        $resp = $this->makeRequest("method=cstat&id=$id");
+
+        if($resp instanceof GoodResponse)
+            return $resp->message;
+        else return "3";
+    }
+    public function getGameStatus($id)
+    {
+        $resp = $this->makeRequest("method=gstat&id=$id");
+
+        if($resp instanceof GoodResponse)
+            return $resp->message;
+        else return "3";
+    }
+
 }
 
 

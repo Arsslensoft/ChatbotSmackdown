@@ -50,3 +50,27 @@ function sendMessage(id,botname,username)
     $("#chatholder").scrollTop($("#chatholder")[0].scrollHeight);
 });
 }
+
+
+function recheckGame(id,stat)
+{
+    $.get("refresh.php",
+        {
+            id: id,
+            m: "gstat"
+        },  function(data){
+            if(data != stat)
+                location.reload();
+        });
+}
+function recheckCompetition(id,stat)
+{
+    $.get("refresh.php",
+        {
+            id: id,
+            m: "cstat"
+        },  function(data){
+            if(data != stat)
+                location.reload();
+        });
+}

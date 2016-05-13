@@ -18,6 +18,45 @@ namespace ABPS
       
        }
 
+       public string GetCompetitionStatus(string id)
+       {
+           try
+           {
+
+               long bid = long.Parse(id);
+               List<Competition> bots = Platform.DBManager.Competitions.Where(x => x.Id == bid).ToList();
+               if (bots.Count > 0)
+                   return JsonConvert.SerializeObject(new GoodResponse("OK",((int)bots[0].Status).ToString()));
+
+               else
+                   return JsonConvert.SerializeObject(new ErrorResponse("COMPETITION_NOT_EXIST", "This competition does not exist"));
+           }
+           catch (Exception ex)
+           {
+               return JsonConvert.SerializeObject(new ErrorResponse("FAILED", ex.Message));
+           }
+
+       }
+       public string GetGameStatus(string id)
+       {
+           try
+           {
+
+               long bid = long.Parse(id);
+               List<Game> bots = Platform.DBManager.Games.Where(x => x.Id == bid).ToList();
+               if (bots.Count > 0)
+                   return JsonConvert.SerializeObject(new GoodResponse("OK", ((int)bots[0].Status).ToString()));
+
+               else
+                   return JsonConvert.SerializeObject(new ErrorResponse("GAME_NOT_EXIST", "This game does not exist"));
+           }
+           catch (Exception ex)
+           {
+               return JsonConvert.SerializeObject(new ErrorResponse("FAILED", ex.Message));
+           }
+
+       }
+
        public string AddBot(string id)
        {
            try
@@ -54,9 +93,7 @@ namespace ABPS
            {
                Platform.LogEvent("Reload bot " + id, ConsoleColor.DarkCyan);
                long bid = long.Parse(id);
-               Platform.DBManager.Dispose();
-               Platform.DBManager = new ChatbotSmackdownDb();
-               Platform.Load();
+               Platform.Synchronize();
          
                List<User> bots = Platform.DBManager.Users.Where(x => x.Id == bid).ToList();
                if (bots.Count > 0)
@@ -161,7 +198,25 @@ namespace ABPS
         }
 
        }
+       public string ReloadCompetitions()
+       {
+           try
+           {
+               Platform.LogEvent("Reload Competitions ", ConsoleColor.DarkCyan);
+      
+               Platform.Synchronize();
+               TournamentManager.Reload();
 
+          
+                   return JsonConvert.SerializeObject(new GoodResponse("OK", "The competitions has been successfully reloaded"));
+              
+           }
+           catch (Exception ex)
+           {
+               return JsonConvert.SerializeObject(new ErrorResponse("FAILED", ex.Message));
+           }
+
+       }
        public string SpectateGame(string gid)
        {
            try
@@ -229,6 +284,8 @@ namespace ABPS
                return GetBotStatus(nvc["id"]);
            else if (method == "add" && nvc["id"] != null)
                return AddBot(nvc["id"]);
+           else if (method == "competreload")
+               return ReloadCompetitions();
            else if (method == "reload" && nvc["id"] != null)
                return ReloadBot(nvc["id"]);
            else if (method == "info" && nvc["id"] != null)
@@ -244,6 +301,12 @@ namespace ABPS
                return SynchronizeWithDB();
            else if (method == "ping")
                return JsonConvert.SerializeObject(new GoodResponse("OK", "Platform is running smoothly"));
+           else if (method == "gstat" && nvc["id"] != null)
+               return GetGameStatus(nvc["id"]);  
+           else if (method == "cstat" && nvc["id"] != null)
+               return GetCompetitionStatus(nvc["id"]);
+
+            
            else return JsonConvert.SerializeObject(new ErrorResponse("NOT_SUPPORTED", "This method is not supported by the platform"));
         
        }

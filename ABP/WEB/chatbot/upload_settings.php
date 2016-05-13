@@ -19,7 +19,6 @@ $name_file = $_FILES["setting"]['name'];
 if( !move_uploaded_file($tmp_file, $content_dir . $name_file) )
     exit("Impossible de copier le fichier dans $content_dir");
 
-$CBSDUM->addAimlSet(intval($_POST["id"]), $name_file);
 $personalities = $CBSDUM->getAllPersonalities(intval($_POST["id"]));
 if(count($personalities) == 1) {
     $personality = Personality::retrieveByPK($personalities[0]->Id);

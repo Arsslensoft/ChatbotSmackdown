@@ -196,6 +196,8 @@ namespace ABPS
         {
             try
             {
+                Competition.Status = CompetitionStatus.Started;
+                Platform.DBManager.SaveChanges();
                 if (CreateNextRound())
                     StartCurrentRound();
                 else

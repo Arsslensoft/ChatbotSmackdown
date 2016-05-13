@@ -104,8 +104,8 @@ namespace ABPS
           long first_votes = GetVoteCount(Game.Players[0].BotId);
           long second_votes = GetVoteCount(Game.Players[1].BotId);
           // set scores
-          Game.Players[0].Score = first_votes * 100;
-          Game.Players[1].Score = second_votes * 100;
+          Game.Players[0].Score += first_votes * 10;
+          Game.Players[1].Score += second_votes * 10;
 
           if (first_votes == second_votes)
           {
@@ -144,6 +144,8 @@ namespace ABPS
           first.Score = new HighestPointsScore(Game.Players[0].Score);
           second.Score = new HighestPointsScore(Game.Players[1].Score);
 
+          Game.Players[0].Bot.BotScore += (int)Game.Players[0].Score;
+          Game.Players[1].Bot.BotScore += (int)Game.Players[1].Score;
 
       }
       

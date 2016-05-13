@@ -31,9 +31,10 @@ if(isset($_POST["ppw"]))
     $ppw = intval($_POST["ppw"]);
     $prize =intval($_POST["prize"]);
     $desc = $_POST["desc"];
-    $start = $_POST["start"];
+    $time = DateTime::createFromFormat('d/m/Y H:i:s',  $_POST["start"]);
+    $start=date("Y-m-d H:i:s",$time->getTimestamp());
     $ccm->createCompetition($start, $name,$desc,$ppw,$prize,$pn);
-    $bpsa->synchronize();
+    $bpsa->reloadCompetitions();
 }
 
 $competitions = $ccm->getAllCompetitions();
@@ -108,7 +109,7 @@ if($CBSDUM->logged_in ){
                             <input class="form-control" id="pn" name="pn" placeholder="Participants numbers" type="number" required="">
                         </div>
                         <div class="form-group form-icon-group">
-                            <input class="form-control" id="start" name="start" placeholder="Start date" type="date" required="">
+                            <input class="form-control" id="start" name="start" placeholder="Start date" type="datetime" required="">
                         </div>
                         <div class="form-group form-icon-group">
                             <input class="form-control" id="prize" name="prize" placeholder="Prize" type="number" required="">
@@ -148,7 +149,8 @@ foreach ($competitions as $Competition) {
                                 foreach($rankingc as $rank){
                                     if($rank->Rank == 1 ){
                                       $botn = $ccm->getBot($rank->BotId)  ;
-                                echo $botn->BotName ;}
+                                echo $botn->BotName ;
+                                    }
                                 }
 
                                 ?> </td>

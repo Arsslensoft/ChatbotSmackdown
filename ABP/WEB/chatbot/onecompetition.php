@@ -40,7 +40,16 @@ else
         </div>
 
     </section>
+    <script type="text/javascript">
 
+        jQuery(document).ready(function() {
+            setInterval('refreshOnStateChange()', 2000);
+        });
+    function refreshOnStateChange()
+    {
+        recheckCompetition(<?php echo $tmp->Id; ?>,"<?php echo $tmp->Status; ?>");
+    }
+ </script>
     <?php
     if($tmp->Status != CompetitionStatus::Ready)
     {
