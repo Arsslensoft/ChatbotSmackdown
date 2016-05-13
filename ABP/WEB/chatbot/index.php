@@ -81,7 +81,7 @@ else
                         <div class="box-round">
                             <div class="box-dummy"></div>
                             <a class="box-inner " href="<?php if(!$CBSDUM->logged_in) echo "signup.php"; else echo "profile.php"; ?>">
-                                <img  src="s1.png" data-animation="bounce">
+                                <img  src="images/s1.png" data-animation="bounce">
                             </a>
                         </div>
                         <!-- service 1 text -->
@@ -101,7 +101,7 @@ else
                         <div class="box-round">
                             <div class="box-dummy"></div>
                             <a class="box-inner " href="<?php if(!$CBSDUM->logged_in) echo "signup.php"; else echo "profile.php"; ?>">
-                                <img  src="s2.png" data-animation="bounce">
+                                <img  src="images/s2.png" data-animation="bounce">
                             </a>
                         </div>
                         <!-- service 1 text -->
@@ -120,7 +120,7 @@ else
                         <div class="box-round">
                             <div class="box-dummy"></div>
                             <a class="box-inner " href="<?php if(!$CBSDUM->logged_in) echo "signup.php"; else echo "profile.php"; ?>">
-                                <img  src="s3.png" data-animation="bounce">
+                                <img  src="images/s3.png" data-animation="bounce">
                             </a>
                         </div>
                         <!-- service 1 text -->
@@ -140,7 +140,7 @@ else
                         <div class="box-round">
                             <div class="box-dummy"></div>
                             <a class="box-inner " href="signup.html">
-                                <img  src="s4.png" data-animation="bounce">
+                                <img  src="images/s4.png" data-animation="bounce">
                             </a>
                         </div>
                         <!-- service 1 text -->

@@ -174,113 +174,66 @@ else
     <?php }
     else
     {
-    ?>
-
-    <div class="demo" style="transform: scale(1.7)">
-        <div class="jQBracket lr " style="height: 168px; width: 320px;margin: auto; padding: 10px">
-
-
-            <div class="bracket " style="height: 300px;">
-
-                <?php
+        $gamesstring = "";
+        $resultsstring = "";
                 $teamid = 0;
 
                 $rounds = $ccm->getAllRounds($competid);
+                $participants = $ccm->getAllParticipations($competid);
+        $i =0;
+        $rnd =0;
+    foreach ($participants as $part) {
+        $player = $ccm->getBot($part->BotId);
+        if($i % 2 == 0)
+        $gamesstring = $gamesstring."[\"".$player->BotName."\",";
+        else
+            $gamesstring = $gamesstring."\"".$player->BotName."\"],\n";
 
-                foreach ($rounds as $key) {
+        $i++;
+    }
+                foreach ($rounds as $key) {$rnd++;
+                    $resultsstring = $resultsstring."[";
                     $gpair = 0;
                     $games = $ccm->getAllGames($key->Id);
 
-                    // finals
-                    if (count($games) == 1) {
-
-                        echo "    <div class=\"finals\">";
-                        echo "<div class=\"round\">";
-
-                        foreach ($games as $game) {
-
-                            echo "    <div class=\"match\" style=\"height: 64px;\">";
-                            echo "    <div class=\"teamContainer\" style=\"position: absolute; bottom: -22.5px;\">";
-                            $players = $ccm->getAllPlayers($game->Id);
-                            foreach ($players as $player) {
-                                $teamid = $player->BotId;
-                                $rank = $ccm->getRanking($competid, $player->BotId);
-                                if ($game->Status != GameStatus::Completed) {
-
-                                    echo " <div class=\"team\" data-resultid=\"team-$teamid\" data-teamid=\"$teamid\">";
-                                    $bot = $ccm->getBot($player->BotId);
-                                    echo "    <div class=\"label editable\" style=\"color:#34383b\">" . $bot->BotName . "</div>";
-                                    echo "<div class=\"score editable\" data-resultid=\"result-0\">" . $player->Score . "</div>";
-                                    echo "  </div>";
-                                } else {
-                                    if ($player->BotId == $game->WinnerId)
-                                        echo " <div class=\"team win highlightWinner\" data-resultid=\"team-$teamid\" data-teamid=\"$teamid\">";
-                                    else echo "   <div class=\"team lose highlightLooser\" data-resultid=\"team-$teamid\" data-teamid=\"$teamid\">";
-                                    $bot = $ccm->getBot($player->BotId);
-                                    echo "    <div class=\"label editable\" style=\"color:#34383b\">" . $bot->BotName . "</div>";
-                                    echo "<div class=\"score editable\" data-resultid=\"result-0\">" . $player->Score . "</div>";
-                                    echo "   <div class=\"bubble\">" . getRankName($rank[0]->Rank) . "</div>";
-                                    echo "  </div>";
+                    foreach ($games as $game)
+                        $resultsstring = $resultsstring."[".$players[0]->Score.", ".$players[1]->Score."],\n";
 
 
-                                }
-                            }
-                            echo "  </div>        </div>";
-
-                        }
-
-
-                        echo "  </div>        </div>";
-                    } else {
-                        echo "<div class=\"round\">";
-                        foreach ($games as $game) {
-                            $gpair++;
-                            echo "    <div class=\"match\" style=\"height: 64px;\">";
-                            echo "    <div class=\"teamContainer\" style=\"top: 9.5px;\">";
-                            $players = $ccm->getAllPlayers($game->Id);
-                            foreach ($players as $player) {
-
-
-                                $teamid = $player->BotId;
-                                if ($game->Status != GameStatus::Completed) {
-                                    echo " <div class=\"team\" data-resultid=\"team-$teamid\" data-teamid=\"$teamid\">";
-                                    $bot = $ccm->getBot($player->BotId);
-                                    echo "    <div class=\"label editable\" style=\"color:#34383b\">" . $bot->BotName . "</div>";
-                                    echo "<div class=\"score editable\" data-resultid=\"result-0\">" . $player->Score . "</div>";
-                                    echo "  </div>";
-                                } else {
-                                    if ($player->BotId == $game->WinnerId)
-                                        echo " <div class=\"team win\" data-resultid=\"team-$teamid\" data-teamid=\"$teamid\">";
-                                    else echo "   <div class=\"team lose\" data-resultid=\"team-$teamid\" data-teamid=\"$teamid\">";
-
-                                    $bot = $ccm->getBot($player->BotId);
-                                    echo "    <div class=\"label editable\" style=\"color:#34383b\">" . $bot->BotName . "</div>";
-                                    echo "<div class=\"score editable\" data-resultid=\"result-0\">" . $player->Score . "</div>";
-                                    echo "  </div>";
-                                }
-                            }
-                            if ($gpair % 2 != 0)
-                                echo "        <div class=\"connector\" style=\"height: 32px; width: 20px; right: -22px; top: 11.25px; border-bottom-style: none;\">                            <div class=\"connector\" style=\"width: 20px; right: -20px; bottom: 0px;\"></div>                        </div>";
-                            else echo "<div class=\"connector\" style=\"height: 32px; width: 20px; right: -22px; bottom: 11.25px; border-top-style: none;\"><div class=\"connector\" style=\"width: 20px; right: -20px; top: 0px;\"></div></div>";
-                            echo "  </div>        </div>";
-
-                        }
-                        echo "</div>";
-                    }
+                    $resultsstring = $resultsstring."],\n";
 
 
                 }
-                }
-                ?>
+?>
+    <div id="minimal">
+        <script type="text/javascript">
+            var singleElimination = {
 
 
-
-            </div>
-
-        </div>
-    </div>
+                "teams": [              // Matchups
+                    <?php echo $gamesstring; ?>
+                ],
 
 
+                "results": [            // List of brackets (single elimination, so only one bracket)
+                    [                     // List of rounds in bracket
+                        <?php echo $resultsstring; ?>
+                    ]
+                ]
+            }
+            $(function() {
+                $('#minimal .demo').bracket({
+                    skipConsolationRound: true,
+                    init: singleElimination /* data to initialize the bracket with */ });
+                $('#minimal .jQBracket').css("left",300+"px");
+                $('#minimal .jQBracket').css("top",70+"px");
+                $('#minimal .jQBracket').css("height",<?php echo $tmp->ParticipantNumber * 50 + 100; ?> +"px");
+            })
+        </script>
+    <div class="demo" style="transform: scale(1.5)">    </div>
+</div>
+<?php     }
+    ?>
             </div></div>
             </section>
 

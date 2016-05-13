@@ -100,11 +100,19 @@ namespace ABPS
 
           while ((DateTime.Now - Start) < Game.Duration)
           {
-              answer = Second.Answer(answer, First);
-              CurrentGameHistory.Entries.Add(new GameHistoryEntry(SecondUser, answer));
-     
-              answer = First.Answer(answer, Second);
-              CurrentGameHistory.Entries.Add(new GameHistoryEntry(FirstUser, answer));
+              try
+              {
+                  answer = Second.Answer(answer, First);
+                  CurrentGameHistory.Entries.Add(new GameHistoryEntry(SecondUser, answer));
+
+                  answer = First.Answer(answer, Second);
+                  CurrentGameHistory.Entries.Add(new GameHistoryEntry(FirstUser, answer));
+                
+              }
+              catch (Exception ex)
+              {
+                  Platform.LogEvent("A bot caused error: " + ex.Message, ConsoleColor.Red);
+              }
               Thread.Sleep(Game.PlayerSleepTime);
           }
 
