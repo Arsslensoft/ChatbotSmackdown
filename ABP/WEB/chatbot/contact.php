@@ -13,7 +13,10 @@ if(isset($_POST["name"])) {
     mail($to, $subject, $msg, $headers);
 
 }
-
+if($loggedin)
+    include "header.loggedin.php";
+else
+    include "header.offline.php";
 ?>
 <!-- Main Page -->
 <div id="content" role="main">
@@ -443,8 +446,8 @@ top: 234px;"></div><div style="width: 256px; height: 256px; transform: translate
                                 <div >
                                     <i class="fa fa-twitter"></i>
                                 </div>
-                                <a href="http://twitter.com/sbsm">
-                                    twitter.com/sbsm
+                                <a href="http://twitter.com/cbsm">
+                                    twitter.com/cbsm
                                 </a>
 
                             </li>

@@ -47,6 +47,7 @@ namespace ABPS
        /// </summary>
         public void Start()
         {
+            Platform.Synchronize();
             Platform.LogEvent("Round " + Round.Id.ToString() + " Started ", ConsoleColor.DarkCyan);
 
            TournamentPairing pair = null;

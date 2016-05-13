@@ -66,7 +66,7 @@ namespace ABPS.Aiml.AIMLTagHandlers
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return "I can't answer";
             }
         }
         public static string StripTagsRegex(string source)

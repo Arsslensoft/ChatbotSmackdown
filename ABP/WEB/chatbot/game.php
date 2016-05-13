@@ -18,11 +18,45 @@ if(isset($_POST["vote"]))
     $pid = intval($_POST["vote"]);
     $ccm->voteForPlayer($pid);
 }
+
+if($loggedin)
+    include "header.loggedin.php";
+else
+    include "header.offline.php";
 ?>
 <!-- Main Page -->
 <div id="content" role="main">
 
+    <script type="text/javascript">
+        <?php if($game->Status == GameStatus::Playing){ ?>
+        jQuery(document).ready(function() {
+            setInterval('refreshChat()', 2500);
+        });
 
+        <?php } ?>
+        function refreshChatbox(gameid, firstid, secondid)
+        {
+            var chatbase="<h6>Chat History</h6><div  id=\"spectatebox\"></div>";
+            $("#chatbox").empty();
+            $("#chatbox").append(chatbase);
+            $.get("spectate.php",
+                {
+                    id: gameid,
+                    sid:secondid,
+                    fid:firstid
+                },  function(data) {
+                    var el = data;
+                    $(el).insertBefore("#spectatebox");
+                    $("#chatholder").scrollTop($("#chatholder")[0].scrollHeight);
+                });
+
+
+        }
+function refreshChat()
+{
+refreshChatbox(<?php echo $gameid; ?>,<?php echo $player1->Id; ?>,<?php echo $player2->Id; ?>);
+}
+    </script>
     <!-- name page with background -->
     <section class="section swatch-black-beige" id="website_main_name">
         <div class="background-media skrollable skrollable-between" style="background-image: url(cbsm/background.jpg); background-size: cover; background-position: 50% 0px;" data-start="background-position: 50% 0px" data-top-bottom="background-position: 50% -200px">
@@ -96,7 +130,6 @@ if(isset($_POST["vote"]))
 
                     $gamehist = json_decode($bpsa->getGameHistory($gameid));
                     foreach ($gamehist->{'history'}->{'Entries'} as $entry) {
-
                         if ($player1->Id == $entry->{'BotId'})
                             echo " <div class=\"answer left\"><div class=\"avatar\"><img src=\"data/avatars/".$player1->Id.".jpg\"> <div class=\"status offline\"></div></div><div class=\"name\" style='color:white;'>" . $entry->{'Name'} . "</div><div class=\"text\"> " . $entry->{'Message'} . "</div>                <div class=\"time\" style='color:white;'> </div>              </div>";
                         else                              echo " <div class=\"answer right\"><div class=\"avatar\"><img src=\"data/avatars/".$player2->Id.".jpg\"> <div class=\"status offline\" ></div></div><div class=\"name\" style='color:white;'>" . $entry->{'Name'} . "</div><div class=\"text\">" . $entry->{'Message'} . "</div>                <div class=\"time\" style='color:white;'> </div>              </div>";
@@ -104,10 +137,9 @@ if(isset($_POST["vote"]))
                     }
 
                     }
+ ?>
 
-
-
-                    ?>
+                    <div  id="spectatebox"></div>
                 </div>
 
             </div>
@@ -183,8 +215,8 @@ if(isset($_POST["vote"]))
                                 <div >
                                     <i class="fa fa-twitter"></i>
                                 </div>
-                                <a href="http://twitter.com/sbsm">
-                                    twitter.com/sbsm
+                                <a href="http://twitter.com/cbsm">
+                                    twitter.com/cbsm
                                 </a>
 
                             </li>

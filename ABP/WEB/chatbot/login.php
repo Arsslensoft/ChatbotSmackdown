@@ -21,6 +21,11 @@ include "header.php";
 
 	} // Validation end
 
+
+if($loggedin)
+	include "header.loggedin.php";
+else
+	include "header.offline.php";
 ?>
 
 
@@ -140,8 +145,8 @@ include "header.php";
 								<div >
 									<i class="fa fa-twitter"></i>
 								</div>
-								<a href="http://twitter.com/sbsm">
-									twitter.com/sbsm
+								<a href="http://twitter.com/cbsm">
+									twitter.com/cbsm
 								</a>
 
 							</li>

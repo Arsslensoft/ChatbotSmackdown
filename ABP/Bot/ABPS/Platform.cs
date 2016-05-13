@@ -24,7 +24,18 @@ namespace ABPS
        public static HttpService Service { get; set; }
        public static System.Timers.Timer UpdateTimer {get;set;}
        public static List<Chatbot> Chatbots { get; set; }
-
+       public static void Synchronize()
+       {
+           try
+           {
+               foreach (var entity in Platform.DBManager.ChangeTracker.Entries())
+                   entity.Reload();
+           }
+           catch (Exception ex)
+           {
+               Platform.LogEvent("Synchronization error : " + ex.Message, ConsoleColor.Red);
+           }
+       }
 
        public static void LogEvent(string ev, ConsoleColor color)
        {

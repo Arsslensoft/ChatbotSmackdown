@@ -9,6 +9,11 @@ if(isset($_GET["error"])) {
     header("Location: index.php");
     exit;
 }
+
+if($loggedin)
+    include "header.loggedin.php";
+else
+    include "header.offline.php";
 ?>
 
 <!-- Main Page -->
@@ -105,8 +110,8 @@ if(isset($_GET["error"])) {
                                 <div >
                                     <i class="fa fa-twitter"></i>
                                 </div>
-                                <a href="http://twitter.com/sbsm">
-                                    twitter.com/sbsm
+                                <a href="http://twitter.com/cbsm">
+                                    twitter.com/cbsm
                                 </a>
 
                             </li>

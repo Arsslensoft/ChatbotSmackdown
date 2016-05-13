@@ -51,7 +51,9 @@ namespace ABPS
 
                   if (OnGameCommand != null)
                       OnGameCommand(Game, GameCommand.START_GAME);
-                
+
+                  Platform.Synchronize();
+
                   Game.Status = GameStatus.Playing;
                   Platform.DBManager.SaveChanges();
                   Driver = new GameDriver(Game);
@@ -95,6 +97,7 @@ namespace ABPS
         /// </summary>
       public void CloseVoteAndSetResult()
       {
+          Platform.Synchronize();
           Game.Status = GameStatus.Completed;
 
           // get votes

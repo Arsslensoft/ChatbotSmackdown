@@ -27,7 +27,14 @@ if(isset($_POST["email"])) {
         die("Error ");
     header("Location: login.php");
     exit;
+
 }
+
+
+if($loggedin)
+    include "header.loggedin.php";
+else
+    include "header.offline.php";
 ?>
 <!-- Main Page -->
 <div id="content" role="main">
@@ -165,8 +172,8 @@ if(isset($_POST["email"])) {
                                 <div >
                                     <i class="fa fa-twitter"></i>
                                 </div>
-                                <a href="http://twitter.com/sbsm">
-                                    twitter.com/sbsm
+                                <a href="http://twitter.com/cbsm">
+                                    twitter.com/cbsm
                                 </a>
 
                             </li>

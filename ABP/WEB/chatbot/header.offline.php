@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="../index.html" class="navbar-brand">
+            <a href="index.php" class="navbar-brand">
                 <img src="cbsm/icone.png" alt="ChatbotSmackDown">
             </a>
         </div>
@@ -29,30 +29,41 @@
             </div>
 
             <ul class="nav navbar-nav navbar-right">
-                <li >
-                    <a href="index.html" >Home</a>
+                <li class="dropdown active">
+                    <a href="index.php" class="dropdown-toggle" data-toggle="dropdown">Home</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.php#services">Services</a>
+                        </li>
+                        <li><a href="index.php#TopBots">Top chatBots</a>
+                        </li>
+                        <li><a href="index.php#talk">Talk with me</a>
+                        </li>
+                        <li><a href="index.php#login">Login</a>
+                        </li>
+                        <li><a href="index.php#about">About us</a>
 
+                    </ul>
                 </li>
 
                 <li >
-                    <a href="Competitions.html">Competitions</a>
+                    <a href="competitions.php">Competitions</a>
 
                 </li>
 
                 <li>
-                    <a href="Bots.html" >ChatBots</a>
+                    <a href="bots.php" >ChatBots</a>
 
                 </li>
                 <li >
-                    <a href="login.html" >Log in</a>
+                    <a href="login.php" >Log in</a>
 
                 </li>
                 <li >
-                    <a href="sign.html" >sign up</a>
+                    <a href="signup.php" >sign up</a>
 
                 </li>
                 <li>
-                    <a href="contact.html">Contact us</a>
+                    <a href="contact.php">Contact us</a>
 
                 </li>
             </ul>

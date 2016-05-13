@@ -117,7 +117,10 @@ function parseStatut($statut) {
     if($statut == 2) {return "Completed"; }
 
 }
-
+if($loggedin)
+    include "header.loggedin.php";
+else
+    include "header.offline.php";
 ?>
 <!-- Main Page -->
 
@@ -427,6 +430,7 @@ else echo "                                <div style=\" border: 1px solid #5a5a
                                             </div>
 
                                             </div>
+
                                         </div>
 
 
@@ -533,8 +537,8 @@ else echo "                                <div style=\" border: 1px solid #5a5a
                             <div >
                                 <i class="fa fa-twitter"></i>
                             </div>
-                            <a href="http://twitter.com/sbsm">
-                                twitter.com/sbsm
+                            <a href="http://twitter.com/cbsm">
+                                twitter.com/cbsm
                             </a>
                         </li>
                         <li>

@@ -25,6 +25,10 @@ namespace ABPS
       {
           get { return Path.Combine(BotPath, "aiml"); }
       }
+  public string UsersPath
+      {
+          get { return Path.Combine(BotPath, "users"); }
+      }
 
       public static void Copy(string sourceDirectory, string targetDirectory)
       {
@@ -81,17 +85,20 @@ namespace ABPS
       private void ReloadAimlSets()
       {
           Platform.LogEvent("Loading aiml " + User.BotName, ConsoleColor.Gray);
-          List<AimlSet> aimls = Platform.DBManager.AimlSets.Where(x => x.BotId == User.Id).ToList();
-          foreach (AimlSet ai in aimls)
+          if (User.Id == 1)
+              BotEngine.loadAIMLFromFiles();
+          else
           {
-          
+              List<AimlSet> aimls = Platform.DBManager.AimlSets.Where(x => x.BotId == User.Id).ToList();
+              foreach (AimlSet ai in aimls)
+              {
+
                   XmlDocument doc = new XmlDocument();
                   doc.Load(Path.Combine(AIMLPath, ai.AimlFile));
                   BotEngine.loadAIMLFromXML(doc, Path.Combine(AIMLPath, ai.AimlFile));
-              
+
+              }
           }
-        //if(User.Id == 1)
-        //  BotEngine.loadAIMLFromFiles();
       }
       public void ReloadBot(ABPS.Data.User u)
       {
@@ -129,13 +136,14 @@ namespace ABPS
 
           Request r = new Request(message, GetVisitor(v), BotEngine);
           Result res = BotEngine.Chat(r);
-          return res.Output;
+          res.user.SaveSettings(Path.Combine(UsersPath, v.VisitorIdentifier+ ".xml"));
+             return res.Output.Length == 0?"I can't understand":res.Output;
       }
       public string Answer(string message, Chatbot bot)
       {
           Request r = new Request(message, bot.BotUser, BotEngine);
           Result res = BotEngine.Chat(r);
-          return res.Output;
+          return res.Output.Length == 0?"I can't understand":res.Output;
       }
 
     }

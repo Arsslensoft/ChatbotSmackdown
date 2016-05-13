@@ -24,21 +24,22 @@ namespace ABPS
                 while (!CanStart())
                     Thread.Sleep(1000);
 
-            if (IsRepeatable())
-            {
-                // execute the job in intervals determined by the methd
-                // GetRepetionIntervalTime()
-                while (true)
+                if (IsRepeatable())
+                {
+                    // execute the job in intervals determined by the methd
+                    // GetRepetionIntervalTime()
+                    while (IsRepeatable())
+                    {
+                        DoJob();
+                        Thread.Sleep(GetRepetitionIntervalTime());
+                    }
+                }
+
+                       // since there is no repetetion, simply execute the job
+                else
                 {
                     DoJob();
-                    Thread.Sleep(GetRepetitionIntervalTime());
                 }
-            }
-            // since there is no repetetion, simply execute the job
-            else
-            {
-                DoJob();
-            }
         }
 
         /// <summary>

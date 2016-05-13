@@ -196,13 +196,10 @@ namespace ABPS
                return JsonConvert.SerializeObject(new ErrorResponse("FAILED", ex.Message));
            }
        }
-       public string Synchronize()
+       public string SynchronizeWithDB()
        {
            try{
-               Platform.DBManager.Dispose();
-               Platform.DBManager = new ChatbotSmackdownDb();
-               Platform.Load();
-
+             Platform.Synchronize();
                return JsonConvert.SerializeObject(new GoodResponse("OK", "Platform has been synchronized with current database"));
                 }
            catch (Exception ex)
@@ -244,7 +241,7 @@ namespace ABPS
            else if (method == "spectate" && nvc["gid"] != null)
                return SpectateGame(nvc["gid"]);
            else if (method == "sync")
-               return Synchronize();
+               return SynchronizeWithDB();
            else if (method == "ping")
                return JsonConvert.SerializeObject(new GoodResponse("OK", "Platform is running smoothly"));
            else return JsonConvert.SerializeObject(new ErrorResponse("NOT_SUPPORTED", "This method is not supported by the platform"));

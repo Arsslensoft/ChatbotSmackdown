@@ -105,6 +105,7 @@ namespace ABPS.Aiml
                     this.bot.DefaultPredicates.Clone(this.Predicates);
                     this.Predicates.addSetting("topic", "*");
                     this.Predicates.updateSetting("name", UserID);
+
                 }
                 else
                 {
@@ -133,7 +134,20 @@ namespace ABPS.Aiml
                 return "*";
             }
         }
+        /// <summary>
+        /// Save Settings
+        /// </summary>
+        public void SaveSettings(string path)
+        {
+            try
+            {
+                Predicates.DictionaryAsXML.Save(path);
+            }
+            catch
+            {
 
+            }
+        }
         /// <summary>
         /// Returns the first sentence of the last output from the bot
         /// </summary>

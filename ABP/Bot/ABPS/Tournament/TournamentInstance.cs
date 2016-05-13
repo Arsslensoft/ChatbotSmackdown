@@ -34,6 +34,7 @@ namespace ABPS
         }
         private void CreateRound(TournamentRound rnd, ref Round round)
         {
+            Platform.Synchronize();
             Platform.LogEvent("Creating round ", ConsoleColor.DarkCyan);
 
              round = new Round();
@@ -71,7 +72,7 @@ namespace ABPS
 
 
             }
-
+            
             Platform.DBManager.SaveChanges();
 
 
@@ -79,6 +80,7 @@ namespace ABPS
         }
          private bool CreateNextRound()
         {
+     
             if (CurrentRound != null)
                 CurrentRound.CheckResults();
                
@@ -114,12 +116,13 @@ namespace ABPS
 
             
         }
-          private void AddPlayer(User user)
+        private void AddPlayer(User user)
         {
             Teams.Add(new Tournaments.TournamentTeam(user.Id, user.BotScore));
         }
           private void StartCurrentRound()
           {
+              
               Platform.LogEvent("Current round started  "+Competition.Name, ConsoleColor.DarkCyan);
          if(CurrentRound != null)
               CurrentRound.Start();
@@ -134,6 +137,7 @@ namespace ABPS
           }
           private void RewardPlayers()
           {
+              Platform.Synchronize();
               Platform.LogEvent("Rewarding players "+Competition.Name, ConsoleColor.DarkCyan);
               Dictionary<long, double> myDict = new Dictionary<long, double>();
        
@@ -195,10 +199,9 @@ namespace ABPS
                 if (CreateNextRound())
                     StartCurrentRound();
                 else
-                {
                     RewardPlayers();
-                    CurrentThread.Abort();
-                }
+               
+          
             }
             catch (Exception ex)
             {

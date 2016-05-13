@@ -11,17 +11,6 @@
     <link rel="stylesheet" href="assets/css/color-defaults.min.css">
     <link rel="stylesheet" href="assets/css/swatch-beige-black.min.css">
     <link rel="stylesheet" href="assets/css/swatch-black-beige.min.css">
-    <link rel="stylesheet" href="assets/css/swatch-black-white.min.css">
-    <link rel="stylesheet" href="assets/css/swatch-black-yellow.min.css">
-    <link rel="stylesheet" href="assets/css/swatch-blue-white.min.css">
-    <link rel="stylesheet" href="assets/css/swatch-green-white.min.css">
-    <link rel="stylesheet" href="assets/css/swatch-red-white.min.css">
-    <link rel="stylesheet" href="assets/css/swatch-white-black.min.css">
-    <link rel="stylesheet" href="assets/css/swatch-white-blue.min.css">
-    <link rel="stylesheet" href="assets/css/swatch-white-green.min.css">
-    <link rel="stylesheet" href="assets/css/swatch-white-red.min.css">
-    <link rel="stylesheet" href="assets/css/swatch-yellow-black.min.css">
-    <link rel="stylesheet" href="assets/css/fonts.min.css" media="screen">
     <link rel="stylesheet" href="assets/css/style.css" media="screen">
 
 
@@ -41,10 +30,4 @@ require_once(dirname(__FILE__)."/classes/su.inc.php");
 $CBSDUM = new CBSDUserManagement();
 
 $loggedin = $CBSDUM->logged_in;
-
-if($loggedin)
-    include "header.loggedin.php";
-else
-    include "header.offline.php";
-
 ?>

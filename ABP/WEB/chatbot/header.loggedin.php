@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="../index.html" class="navbar-brand">
+            <a href="index.php" class="navbar-brand">
                 <img src="cbsm/icone.png" alt="ChatbotSmackDown">
             </a>
         </div>
@@ -29,27 +29,39 @@
             </div>
 
             <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown active">
+                    <a href="index.php" class="dropdown-toggle" data-toggle="dropdown">Home</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.php#services">Services</a>
+                        </li>
+                        <li><a href="index.php#TopBots">Top chatBots</a>
+                        </li>
+                        <li><a href="index.php#talk">Talk with me</a>
+                        </li>
+                        <li><a href="index.php#about">About us</a>
 
+                    </ul>
+                </li>
                 <li >
-                    <a href="profile.html" >Profile</a>
+                    <a href="profile.php" >Profile</a>
 
                 </li>
 
                 <li >
-                    <a href="CompetitionsLogged.html">Competitions</a>
+                    <a href="competitions.php">Competitions</a>
 
                 </li>
 
                 <li>
-                    <a href="BotsLogged.html" >ChatBots</a>
+                    <a href="bots.php" >ChatBots</a>
 
                 </li>
                 <li>
-                    <a href="contactLogged.html">Contact us</a>
+                    <a href="contact.php">Contact us</a>
 
                 </li>
                 <li >
-                    <a href="logout.php" >Log out</a>
+                    <a href="logout.php" >Logout</a>
 
                 </li>
 

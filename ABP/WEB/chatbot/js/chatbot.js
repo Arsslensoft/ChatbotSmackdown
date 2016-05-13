@@ -49,7 +49,4 @@ function sendMessage(id,botname,username)
 
     $("#chatholder").scrollTop($("#chatholder")[0].scrollHeight);
 });
-
-
-
 }

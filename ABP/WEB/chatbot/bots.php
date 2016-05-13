@@ -9,6 +9,11 @@ if( isset($_POST["search"])) {
         $error= "Aucun Bot de ce nom";
     }
 }
+
+if($loggedin)
+    include "header.loggedin.php";
+else
+    include "header.offline.php";
 ?>
 
 
@@ -45,7 +50,7 @@ if( isset($_POST["search"])) {
                    
                      <header class="section-header ">
                         <h1 class="headline super hairline">Chat Bots</h1>
-                        <p class="">Under construction</p>
+
                     </header>
                  <div class="row-fluid">
                         <div class="span12">
@@ -126,7 +131,7 @@ if( isset($_POST["search"])) {
                     Laouini Ahmed
                   </a>
                                     </li>
-                                   
+
                                 </ul>
                             </div>
                         </div>
@@ -143,25 +148,25 @@ if( isset($_POST["search"])) {
                                         <a href="http://facebook.com/ChatBotsm">
                     facebook.com/ChatBotsm
                   </a>
-              
+
                                     </li>
                                     <li>
                                         <div >
                                             <i class="fa fa-twitter"></i>
                                         </div>
-                                        <a href="http://twitter.com/sbsm">
-                    twitter.com/sbsm
+                                        <a href="http://twitter.com/cbsm">
+                    twitter.com/cbsm
                   </a>
-                
+
                                     </li>
                                     <li>
                                         <div >
                                             <i class="fa fa-envelope"></i>
                                         </div>
                                         <a href="">
-                    INSAT- GL2 
+                    INSAT- GL2
                   </a>
-                    
+
                                     </li>
                                 </ul>
                             </div>
@@ -171,25 +176,25 @@ if( isset($_POST["search"])) {
                                 <h3 class="sidebar-header">About Us</h3>
                                 <ul>
                                     <li>
-                                    
+
                                         <a href="#">
-                    SDL Team 2016 
+                    SDL Team 2016
                   </a>
 
         </li>
     <li>
-                                    
+
     <a href="#">
                   ALL RIGHTS RESERVED
                   </a>
-                
+
    </li>
-                                    
+
                                 </ul>
                             </div>
                         </div>
-                        
-                        
+
+
                     </div>
                 </div>
             </footer>
