@@ -259,10 +259,16 @@ else
                 <div class="panel panel-default">
 
                     <div class="panel-body">
-                        <form accept-charset="UTF-8" >
+                        <?php if( isset($error) ): ?>
+                            <p style="color: red">
+                                <?php echo $error; ?>
+                            </p>
+                        <?php endif; ?>
+
+                        <form accept-charset="UTF-8" method="post" action="login.php">
 
                             <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" type="text">
+                                <input class="form-control" placeholder="Username" name="username" type="text">
                             </div>
                             <div class="form-group">
                                 <input class="form-control" placeholder="Password" name="password" type="password" value="">
